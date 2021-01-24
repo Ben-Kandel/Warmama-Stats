@@ -1,0 +1,111 @@
+@import '../../variables';
+
+.game-page {
+  text-align: center;
+  margin-top: 20px;
+
+  .header {
+
+    .name {
+      // display: flex;
+      // flex-flow: row nowrap;
+      // align-items: center;
+      // justify-content: space-evenly;
+      // // border: 1px solid red;
+      // font-size: 200%;
+      // width: 20em;
+      // height: 90px;
+      // margin: auto;
+      text-align: center;
+
+      .gametype {
+        color: $orange;
+      }
+  
+      .map {
+        color: $orange;
+      }
+  
+      .box {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+  
+      .box:first-child {
+        margin-right: auto;
+      }
+  
+      .box:last-child {
+        margin-left: auto;
+      }
+
+    }
+
+    .date-time {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      // border: 1px solid red;
+      width: 12em;
+      margin: auto;
+      font-size: 130%;
+
+      .time {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+      }
+
+    }
+
+  }
+
+  .search {
+    width: 25em;
+    height: 4em;
+    padding: 10px;
+    border: 1px solid $green;
+    margin: auto;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      border: 1px solid $gray;
+      margin-left: 5px;
+    }
+
+    button {
+      border: 1px solid $gray;
+      border-radius: 10px;
+    }
+  }
+
+  .outer-container {
+    // border: 2px solid $green;
+    margin-top: -2em; // move it a little closer to the header (ie. ca on wfca1)
+    width: 80em;
+    height: 45em;
+    border-radius: 15px;
+
+    .the-game {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      height: 100%;      
+    }
+    
+    .no-game {
+      margin-top: 3em;
+      font-size: 400%;
+      // text-align: center;
+    }
+  }
+
+}
+

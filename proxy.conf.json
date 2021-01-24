@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://wf.inthekeep.com/match_reports/",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

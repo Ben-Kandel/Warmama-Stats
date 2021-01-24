@@ -1,0 +1,90 @@
+<div *ngIf="game; else elseBlock" class="game">
+  <div *ngIf="game.teams.length != 0; else noTeams" class="team-game">
+    <table *ngFor="let team of game.teams" class="team"
+    [class.forbidden-table]="team.name === 'FORBIDDEN'"
+    [class.icy-table]="team.name === 'ICY'"
+    [class.regular-table]="team.name != 'FORBIDDEN' && team.name != 'ICY'">
+      <caption
+      [class.forbidden]="team.name === 'FORBIDDEN'"
+      [class.icy]="team.name === 'ICY'">
+        {{team.name}}
+        {{team.score}}
+      </caption>
+      <tr class="target">
+        <th class="name too-close">Name</th>
+        <th class="score">Score</th>
+        <th class="frags">Frags</th>
+      </tr>
+      <tr *ngFor="let player of sortPlayersByScore(filterPlayersByTeam(team.index))"
+      (mouseover)="onHover(player)"
+        (mouseout)="offHover()">
+        <td class="too-close" [innerHTML]="player.name | coloredName"></td>
+        <td>{{player.score}}</td>
+        <td>{{player.frags}}</td>
+      </tr>
+    </table>
+  </div>
+  <ng-template #noTeams>
+    <div class="no-team-game">
+      <div *ngIf="gametypeLike('duel'); else ffatemplate" class="duel">
+        <div *ngIf="sortPlayersByScore(game.players)[0] as p" class="player box"
+        (mouseover)="onHover(p)"
+        (mouseout)="offHover()">
+          <p [innerHTML]="p.name | coloredName"></p>
+          <p class="score">Score: {{p.score}}</p>
+          <p class="kda">KDA: {{p.frags}}/{{p.deaths}}</p>
+          <div class="pickups">
+            <ul>
+              <li class="ra">{{p.raTaken}}</li>
+              <li class="ya">{{p.yaTaken}}</li>
+              <li class="ga">{{p.gaTaken}}</li>
+            </ul>
+            <ul>
+              <li class="mh">{{p.mhTaken}}</li>
+              <li class="uh">{{p.uhTaken}}</li>
+            </ul>
+          </div>
+        </div>
+        <p class="vs box">vs.</p>
+        <div *ngIf="sortPlayersByScore(game.players)[1] as p" class="player box"
+        (mouseover)="onHover(p)"
+        (mouseout)="offHover()">
+          <p [innerHTML]="p.name | coloredName"></p>
+          <p class="score">Score: {{p.score}}</p>
+          <p class="kda">KDA: {{p.frags}}/{{p.deaths}}</p>
+          <div *ngIf="gametypeLike('duel')" class="pickups">
+            <ul>
+              <li class="ra">{{p.raTaken}}</li>
+              <li class="ya">{{p.yaTaken}}</li>
+              <li class="ga">{{p.gaTaken}}</li>
+            </ul>
+            <ul>
+              <li class="mh">{{p.mhTaken}}</li>
+              <li class="uh">{{p.uhTaken}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <ng-template #ffatemplate>
+        <div class="ffa">
+          <ul>
+            <li *ngFor="let player of sortPlayersByScore(game.players); index as i"
+            (mouseover)="onHover(player)"
+            (mouseout)="offHover()"
+            class="entry">
+              <p [class.first]="i == 0"
+              [class.second]="i == 1"
+              [class.third]="i == 2"
+              [class.other]="i != 0 && i != 1 && i != 2">
+                {{i+1}}.
+              </p>
+              <p [innerHTML]="player.name | coloredName"></p>
+              <p class="test">({{player.frags}}/{{player.deaths}})</p>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
+<ng-template #elseBlock>test</ng-template>

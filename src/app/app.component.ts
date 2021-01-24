@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'wf-game-stats';
+  title = 'Warmama Stats';
+
+  public constructor(private titleService: Title) { }
+
+  ngOnInit() {
+    this.titleService.setTitle(this.title); 
+  }
+
 }

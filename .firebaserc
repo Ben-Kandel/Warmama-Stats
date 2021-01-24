@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "wf-game-stats"
+  },
+  "targets": {
+    "wf-game-stats": {
+      "hosting": {
+        "wf-game-stats": [
+          "wf-game-stats"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,322 @@
+@import '../../../variables';
+
+.game {
+
+  .no-team-game {
+
+    .duel {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      border: 1px solid $gray;
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+      padding: 15px;
+      width: 60em;
+
+      .box {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+      }
+
+      .box:first-child {
+        margin-right: auto;
+      }
+
+      .box:last-child {
+        margin-left: auto;
+      }
+
+      .vs {
+        font-size: 200%;
+        color: $orange;
+      }
+
+      .player {
+        font-size: 220%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        min-width: 10em;
+        height: 7em;
+        border: 1px solid transparent; // so the border on :hover doesnt move anything around
+        // border: 1px dashed $gray; interesting idea but it doesnt really work that well
+
+        &:hover {
+          border: 1px solid $orange;
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        .score {
+          color: $gray;
+          font-size: 70%;
+          color: $green;
+        }
+
+        .kda {
+          font-size: 50%;
+          margin: 5px;
+          color: $green;
+        }
+
+        .pickups {
+
+          ul {
+            // https://stackoverflow.com/questions/6472178/two-unordered-list-side-by-side
+            list-style-type: none;
+            margin: 10px;
+            padding: 0;
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            font-size: 70%;
+            vertical-align: middle;
+
+            .ra {
+              background-image: url('../../../assets/ra.png');
+              background-size: 20px;
+              background-repeat: no-repeat;
+              background-position: left center;
+              padding: 0px 0px 0px 25px;
+            }
+
+            .ya {
+              background-image: url('../../../assets/ya.png');
+              background-size: 20px;
+              background-repeat: no-repeat;
+              background-position: left center;
+              padding: 0px 0px 0px 25px;
+            }
+
+
+            .ga {
+              background-image: url('../../../assets/ga.png');
+              background-size: 20px;
+              background-repeat: no-repeat;
+              background-position: left center;
+              padding: 0px 0px 0px 25px;
+            }
+
+            .mh {
+              background-image: url('../../../assets/mega-health.png');
+              background-size: 20px;
+              background-repeat: no-repeat;
+              background-position: left center;
+              padding: 0px 0px 0px 25px;
+            }
+
+            .uh {
+              background-image: url('../../../assets/ultra-health.png');
+              background-size: 20px;
+              background-repeat: no-repeat;
+              background-position: left center;
+              padding: 0px 0px 0px 25px;
+            }
+
+          }
+        }
+
+      }
+    }
+
+    .ffa {
+
+      font-size: 150%;
+      text-align: center;
+
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: inline-block;
+        text-align: left;
+        border: 1px solid $gray;
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+        padding: 15px;
+        
+        
+        li {
+          border: 1px solid transparent; // so the hover border doesnt shift elements around
+          // width: 5em;
+          
+          
+
+          p {
+            padding: 5px;
+            margin: 0;
+          }
+
+        }
+
+        .entry {
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+
+          &:hover {
+            border: 1px solid $orange;
+          }
+
+          .test {
+            // font-size: 60%;
+            color: $green;
+          }
+
+          .first {
+            color: gold;
+          }
+
+          .second {
+            color: rgb(226, 222, 222);
+          }
+
+          .third {
+            color: #cf7010;
+          }
+
+          .other {
+            color: red;
+          }
+
+        }
+
+      }
+    }
+
+  }
+
+  .team-game {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    // border: 1px solid $gray;
+    // box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+
+    .team {
+      text-align: left;
+      table-layout: fixed;
+      border-collapse: collapse;
+      margin: 10px;
+      width: 35em;
+      height: 20em;
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+  
+      .too-close {
+        padding-left: 4px;
+      }
+  
+      .target { // the first row in the table, the header
+        border-bottom: 1px solid $gray;
+      }
+  
+      tr td {
+        background-color: $blue;
+      }
+  
+      tr:nth-child(odd) td {
+        background-color: $lighter-blue;
+      }
+  
+      // td { // every row
+      //   // border-bottom: 2px solid $gray;
+      // }
+  
+      tr:last-child td { // the last row
+        border: none;
+      }
+  
+      tr:hover {
+        background-color: $green;
+      }
+  
+      tr:hover td {
+        background-color: transparent;
+      }
+  
+      .name {
+        width: 60%;
+      }
+      
+      .score {
+        width: 20%;
+      }
+  
+      .frags {
+        width: 10%;
+      }
+  
+    }
+
+  }
+
+}
+
+.forbidden {
+  color: $forbidden;
+  
+}
+
+.forbidden-table {
+  border: 2px solid $forbidden;
+}
+
+.icy {
+  color: $icy;
+}
+
+.icy-table {
+  border: 2px solid $icy;
+}
+
+.regular-table {
+  border: 2px solid black;
+}
+
+.black {
+  color: black;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: rgb(17, 221, 17);
+}
+
+.yellow {
+  color: yellow;
+}
+
+.blue {
+  color: rgb(8, 8, 214);
+}
+
+.cyan {
+  color: cyan;
+}
+
+.pink {
+  color: rgb(240, 46, 207);
+}
+
+.white {
+  color: white;
+}
+
+.orange {
+  color: rgb(199, 132, 8);
+  // color: $orange;
+}
+
+.gray {
+  color: gray;
+}

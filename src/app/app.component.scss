@@ -1,0 +1,41 @@
+@import '../variables';
+
+#root {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .nav-bar {
+    width: 30em;
+    height: 2.5em;
+    border: 1px solid $green;
+    padding: 2px;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: $blue;
+      display: flex;
+    }
+
+    li {
+      width: 100%;
+    }
+
+    li a {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: $green;
+      border: 1px solid $gray;
+    }
+
+  }
+}

@@ -1,0 +1,18 @@
+<div class="parent">
+  <form [formGroup]="searchForm" (keydown)="keyPressed($event)" class="the-form">
+    <div>
+      <label>Gametype: </label>
+      <input formControlName="gametype" type="text" placeholder="enter gametype">
+    </div>
+    <div>
+      <label>Map: </label>
+      <input formControlName="map" type="text" placeholder="enter map name">
+    </div>
+    <div>
+      <label>Player Name: </label>
+      <input formControlName="player" type="text" placeholder="case insensitive">
+    </div>
+    <button type="button" (click)="onSubmit()">Search</button>
+  </form>
+
+</div>

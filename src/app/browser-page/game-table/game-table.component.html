@@ -1,0 +1,31 @@
+<div class="wrap">
+  <div class="buttons">
+    <img src="../../../assets/good-arrow.png" class="left" (click)="prevPage()">
+    <h1>Page {{pageNum}}</h1>
+    <img src="../../../assets/good-arrow.png" class="right" (click)="nextPage()"> 
+  </div>
+  <table class="table">
+    <thead>
+      <tr class="target">
+        <th scope="col" class="index">#</th>
+        <th scope="col" class="server">Server</th>
+        <th scope="col" class="map">Map</th>
+        <th scope="col" class="gamemode">Gametype</th>
+        <th scope="col" class="time">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games; let i = index"
+      (click)="rowClicked(game)"
+      [class.highlighted]="game === highlightedGame"
+      (mouseenter)="onHover(game)"
+      (mouseleave)="offHover(game)">
+        <td>{{(pageNum - 1) * pageSize + i}}</td>
+        <td [class.highlighted]="game === highlightedGame" [innerHTML]="game.hostname | coloredName"></td>
+        <td [class.highlighted]="game === highlightedGame">{{game.map}}</td>
+        <td [class.highlighted]="game === highlightedGame">{{game.gametype}}</td>
+        <td [class.highlighted]="game === highlightedGame">{{game.time | timePlayed}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

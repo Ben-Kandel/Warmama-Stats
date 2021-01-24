@@ -1,0 +1,51 @@
+<div *ngIf="game;" class="details">
+  <div *ngIf="hover; else elseBlock" class="player-view">
+    <div *ngIf="getAccuraciesDescending() as weps" class="accuracy row">
+      <h3>Accuracies</h3>
+      <div *ngFor="let row of weps" class="wep">
+        <img src="../../../assets/{{convertToPath(row.name)}}">
+        <span>
+          {{row.name}}:
+        </span>
+        <span>
+          {{row.accuracy}}%
+        </span>
+      </div>
+    </div>
+    <div *ngIf="getDamagesDescending() as weps" class="damage row">
+      <h3>Damage Breakdown</h3>
+      <div *ngFor="let row of weps">
+        <img src="../../../assets/{{convertToPath(row.name)}}">
+        <span>
+          {{row.name}}:
+        </span>
+        <span>
+          {{row.damage | number}}
+        </span>
+      </div>
+    </div>
+    <div *ngIf="getAwardsDescending() as awards" class="awards row">
+      <h3>Awards</h3>
+      <div *ngFor="let row of awards" class="stat">
+        <p [innerHTML]="row.name | coloredName"></p>
+        <span>: {{row.count}}</span>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="game-view">
+      <div *ngIf="getTopDamagePlayers(3, filterOutFakePlayers()) as players" class="top-damage">
+        <h3>Top Damage</h3>
+        <div *ngFor="let player of players" class="stat">
+          <p [innerHTML]="player.name | coloredName"></p>
+          <p>: {{sumUpDamage(player) | number}} dmg</p>
+        </div>
+      </div>
+      <div class="top-weapons">
+        <h3>Weapon Details</h3>
+        <p>#1 Used: {{getMostUsedWeapon(filterOutFakePlayers())}}</p>
+        <p>#1 Dmg: {{getMostDamagingWeapon(filterOutFakePlayers())}}</p>
+      </div>
+    </div>
+  </ng-template>
+</div>

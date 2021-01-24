@@ -1,0 +1,106 @@
+@import '../../../variables';
+
+.details {
+  width: 50em;
+  height: 15em;
+  // border: 2px solid $green;
+  border-radius: 15px;
+  
+
+  h3 {
+    color: $orange;
+  }
+
+  .player-view {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+
+    .row {
+      // border: 1px solid $orange;
+      width: 10em;
+      height: 100%;
+
+      img {
+        vertical-align: middle;
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .accuracy {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      // border: 1px solid $orange;
+      width: 15em;
+    }
+    
+    .damage {
+      // border: 1px solid $orange;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 15em;
+    }
+    
+    .awards { 
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      align-content: center;
+      justify-content: space-evenly;
+      // border: 1px solid $orange;
+      width: 15em;
+    
+      .stat {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+    }
+
+  }
+
+  .game-view {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+
+    .top-damage {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      
+
+      .stat {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+      }
+    }
+
+    .top-weapons {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+}
