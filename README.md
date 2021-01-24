@@ -1,6 +1,7 @@
 # Warmama-Stats
 
-## [website link](https://wf-game-stats.web.app)
+### [Website](https://wf-game-stats.web.app)
+### [Warmama](https://github.com/Qfusion/warmama)
 
 Browse thousands of games, filter by specific gametypes, maps, and players, and get an in-depth view into each player's score, damage, accuracy, and more!
 
