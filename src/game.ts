@@ -24,6 +24,8 @@ export interface Player {
   uhTaken: number;
   bombsPlanted: number;
   bombsDefused: number;
+  timeplayed: number;
+  numrounds: number;
 }
 
 export interface Weapon {

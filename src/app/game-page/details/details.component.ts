@@ -45,6 +45,26 @@ export class DetailsComponent implements OnInit {
     let results = list.sort((a, b) => this.sumUpDamage(b) - this.sumUpDamage(a));
     return results.slice(0, amount);
   }
+  
+  getBestAccOfWeapon(weapon: string): Player {
+    let best = -1;
+    let player: Player;
+    this.game.players.forEach(p => {
+      let test = p.weapons.find(w => w.name == weapon);
+      if(test) {
+        if(test.accuracy > best) {
+          best = test.accuracy;
+          player = p;
+        }
+      }
+    });
+    return player; // it's fine to return undefined, as the *ngIf in the template will check for us
+  }
+
+  getWeaponAcc(weapon: string, p: Player): Weapon {
+    return p.weapons.find(w => w.name == weapon); // since we use this function in tandem 
+  }
+  
 
   getMostUsedWeapon(list: Player[]) {
     let weapons = new Map();
@@ -86,21 +106,21 @@ export class DetailsComponent implements OnInit {
     if(this.hover.weapons.length == 0) {
       return [];
     }
-    return this.hover.weapons.sort((a, b) => b.accuracy - a.accuracy);
+    return this.hover.weapons.slice(0).sort((a, b) => b.accuracy - a.accuracy);
   }
 
   getDamagesDescending(): Weapon[] {
     if(this.hover.weapons.length == 0){
       return [];
     }
-    return this.hover.weapons.sort((a, b) => b.damage - a.damage);
+    return this.hover.weapons.slice(0).sort((a, b) => b.damage - a.damage);
   }
 
   getAwardsDescending(): Award[] {
     if(this.hover.awards.length == 0){
       return [];
     }
-    return this.hover.awards.sort((a, b) => b.count - a.count);
+    return this.hover.awards.slice(0).sort((a, b) => b.count - a.count);
   }
 
 

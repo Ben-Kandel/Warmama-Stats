@@ -1,6 +1,6 @@
 <div class="game-page">
   <div class="search">
-    <input (input)="gameId = $event.target.value" type="text" placeholder="Enter game ID..." id="id-input">
+    <input (input)="gameId = $event.target.value" type="text" placeholder="Enter game ID..." id="id-input" [(ngModel)]="gameId">
     <button class="button" (click)="inputSubmit()">Search</button>
   </div>
   <div *ngIf="game" class="header">

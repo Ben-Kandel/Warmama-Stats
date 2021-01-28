@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 // import { Observable, throwError } from 'rxjs';
 // import { catchError, retry } from 'rxjs/operators';
 
+let DEBUG: boolean = false;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -69,6 +71,8 @@ export class GameService {
         uhTaken: data.uh_taken,
         bombsPlanted: data.bombs_planted,
         bombsDefused: data.bombs_defused,
+        timeplayed: data.timeplayed,
+        numrounds: data.numrounds
       }
       return answer;
     };
@@ -92,8 +96,12 @@ export class GameService {
 
   async getGame(id: string): Promise<Game> {
     try{
-      // let x:any = await this.http.get(this.testingURL + `/api/games/${id}`).toPromise();
-      let x:any = await this.http.get(`/api/games/${id}`).toPromise();
+      let x:any;
+      if(DEBUG) {
+        x = await this.http.get(this.testingURL + `/api/games/${id}`).toPromise();
+      }else {
+        x = await this.http.get(`/api/games/${id}`).toPromise();
+      }
       return this.convertGame(x.data, x.id);
     } catch(err) {
       console.log(err);
@@ -170,8 +178,12 @@ export class GameService {
     }
 
     try{
-      // let url = `${this.testingURL}/api/games${test(query)}`; 
-      let url = `/api/games${test(query)}`;
+      let url: string;
+      if(DEBUG) {
+        url = `${this.testingURL}/api/games${test(query)}`; 
+      }else {
+        url = `/api/games${test(query)}`;
+      }
       let x: any = await this.http.get(url).toPromise();
       let answer: Game[] = [];
       x.forEach(obj => {

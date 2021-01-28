@@ -54,6 +54,8 @@ export class ScoreboardComponent implements OnInit {
           uhTaken: 0,
           bombsPlanted: 0,
           bombsDefused: 0,
+          timeplayed: 0,
+          numrounds: 0,
         });
       }
     }
@@ -74,6 +76,8 @@ export class ScoreboardComponent implements OnInit {
           uhTaken: 0,
           bombsPlanted: 0,
           bombsDefused: 0,
+          timeplayed: 0,
+          numrounds: 0,
         });
       }
     }

@@ -25,6 +25,8 @@ export class GamePageComponent implements OnInit {
     this.route.params.subscribe(params => {
       let id = params['gameId'];
       this.gameId = id;
+      console.log('new game id: ' + this.gameId);
+      // document.getElementById('id-input').nodeValue = 'this.gameId';
     });
   }
 

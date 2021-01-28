@@ -1,50 +1,66 @@
-<div *ngIf="game;" class="details">
+<div *ngIf="game" class="details">
   <div *ngIf="hover; else elseBlock" class="player-view">
-    <div *ngIf="getAccuraciesDescending() as weps" class="accuracy row">
-      <h3>Accuracies</h3>
-      <div *ngFor="let row of weps" class="wep">
-        <img src="../../../assets/{{convertToPath(row.name)}}">
-        <span>
-          {{row.name}}:
-        </span>
-        <span>
-          {{row.accuracy}}%
-        </span>
+    <div class="header">
+      <div class="name">
+        <h3>Player</h3>
+        <p [innerHTML]="hover.name | coloredName"></p>
+      </div>
+      <div class="time">
+        <h3>Time Played</h3>
+        <p *ngIf="hover.numrounds != 0">{{hover.numrounds}} rounds played</p>
+        <p>{{hover.timeplayed | timePlayed}}</p>
       </div>
     </div>
-    <div *ngIf="getDamagesDescending() as weps" class="damage row">
-      <h3>Damage Breakdown</h3>
-      <div *ngFor="let row of weps">
-        <img src="../../../assets/{{convertToPath(row.name)}}">
-        <span>
-          {{row.name}}:
-        </span>
-        <span>
-          {{row.damage | number}}
-        </span>
-      </div>
-    </div>
-    <div *ngIf="getAwardsDescending() as awards" class="awards row">
-      <h3>Awards</h3>
-      <div *ngFor="let row of awards" class="stat">
-        <p [innerHTML]="row.name | coloredName"></p>
-        <span>: {{row.count}}</span>
+    <div *ngIf="getDamagesDescending() as weps" class="stats">
+      <div *ngFor="let wep of weps" class="row">
+        <p
+        [class.RL]="wep.name == 'RL'"
+        [class.EB]="wep.name == 'EB'"
+        [class.LG]="wep.name == 'LG'"
+        [class.PG]="wep.name == 'PG'"
+        [class.GL]="wep.name == 'GL'"
+        [class.GB]="wep.name == 'GB'"
+        [class.MG]="wep.name == 'MG'"
+        [class.RG]="wep.name == 'RG'">
+          {{wep.name}}
+        </p>
+        <p class="color-me-orange">{{wep.accuracy}}%</p>
+        <p class="color-me-green">({{wep.hits}}/{{wep.shots}})</p>
+        <p class="color-me-orange">{{wep.damage}}</p>
+        <p>damage</p>
       </div>
     </div>
   </div>
   <ng-template #elseBlock>
     <div class="game-view">
-      <div *ngIf="getTopDamagePlayers(3, filterOutFakePlayers()) as players" class="top-damage">
+      <div *ngIf="getTopDamagePlayers(3, filterOutFakePlayers()) as players" class="row">
         <h3>Top Damage</h3>
-        <div *ngFor="let player of players" class="stat">
-          <p [innerHTML]="player.name | coloredName"></p>
-          <p>: {{sumUpDamage(player) | number}} dmg</p>
+        <div class="damage">
+          <div *ngFor="let player of players; index as i" class="entry">
+            <img *ngIf="i == 0" src="../../../assets/gold-medal.png" alt="gold medal">
+            <img *ngIf="i == 1" src="../../../assets/silver-medal.png" alt="silver medal">
+            <img *ngIf="i == 2" src="../../../assets/bronze-medal.png" alt="bronze medal">
+            <p [innerHTML]="player.name | coloredName"></p>
+            <p>: {{sumUpDamage(player) | number}} dmg</p>
+          </div>
         </div>
       </div>
-      <div class="top-weapons">
-        <h3>Weapon Details</h3>
-        <p>#1 Used: {{getMostUsedWeapon(filterOutFakePlayers())}}</p>
-        <p>#1 Dmg: {{getMostDamagingWeapon(filterOutFakePlayers())}}</p>
+      <div class="row">
+        <h3>Top Accuracy</h3>
+        <div class="accuracy">
+          <div *ngIf="getBestAccOfWeapon('LG') as p" class="item">
+            <p>{{getWeaponAcc('LG', p).accuracy}}%</p>
+            <img src="../../../assets/lasergun.png" alt="lasergun" width="26" height="26">
+            <p class="color-me">({{getWeaponAcc('LG', p).hits}}/{{getWeaponAcc('LG', p).shots}})</p>            
+            <p [innerHTML]="p.name | coloredName"></p>
+          </div>
+          <div *ngIf="getBestAccOfWeapon('EB') as p" class="item">
+            <p>{{getWeaponAcc('EB', p).accuracy}}%</p>
+            <img src="../../../assets/electrobolt.png" alt="electrobolt" width="26" height="26">
+            <p class="color-me">({{getWeaponAcc('EB', p).hits}}/{{getWeaponAcc('EB', p).shots}})</p>
+            <p [innerHTML]="p.name | coloredName"></p>
+          </div>
+        </div>
       </div>
     </div>
   </ng-template>
