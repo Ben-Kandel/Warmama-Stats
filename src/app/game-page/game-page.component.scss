@@ -7,15 +7,6 @@
   .header {
 
     .name {
-      // display: flex;
-      // flex-flow: row nowrap;
-      // align-items: center;
-      // justify-content: space-evenly;
-      // // border: 1px solid red;
-      // font-size: 200%;
-      // width: 20em;
-      // height: 90px;
-      // margin: auto;
       text-align: center;
 
       .gametype {
@@ -87,7 +78,6 @@
 
   .outer-container {
     // border: 2px solid $green;
-    margin-top: -2em; // move it a little closer to the header (ie. ca on wfca1)
     width: 80em;
     height: 45em;
     border-radius: 15px;
@@ -97,13 +87,11 @@
       flex-flow: column nowrap;
       align-items: center;
       justify-content: space-evenly;
-      height: 100%;      
     }
     
     .no-game {
       margin-top: 3em;
       font-size: 400%;
-      // text-align: center;
     }
   }
 

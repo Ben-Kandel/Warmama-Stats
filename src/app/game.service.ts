@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // import { Observable, throwError } from 'rxjs';
 // import { catchError, retry } from 'rxjs/operators';
 
-let DEBUG: boolean = false;
+let DEBUG: boolean = true;
 
 @Injectable({
   providedIn: 'root'
