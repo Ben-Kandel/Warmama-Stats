@@ -21,6 +21,7 @@
     <div *ngIf="game; else elseBlock" class="the-game">
       <app-scoreboard (playerHovered)="playerHovered($event)" [game]="game"></app-scoreboard>
       <app-details [hover]="hover" [game]="game"></app-details>
+      <app-gametype-details [game]="game"></app-gametype-details>
     </div>
     <ng-template #elseBlock>
       <div class="no-game">

@@ -26,6 +26,8 @@ export interface Player {
   bombsDefused: number;
   timeplayed: number;
   numrounds: number;
+  teamfrags: number;
+  suicides: number;
 }
 
 export interface Weapon {

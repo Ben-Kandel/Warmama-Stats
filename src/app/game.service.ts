@@ -72,7 +72,9 @@ export class GameService {
         bombsPlanted: data.bombs_planted,
         bombsDefused: data.bombs_defused,
         timeplayed: data.timeplayed,
-        numrounds: data.numrounds
+        numrounds: data.numrounds,
+        teamfrags: data.teamfrags,
+        suicides: data.suicides,
       }
       return answer;
     };

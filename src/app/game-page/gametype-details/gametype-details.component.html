@@ -1,0 +1,36 @@
+<div *ngIf="game" class="gametype-details">
+  <div *ngIf="isGametype('bomb')" class="bomb-game">
+    <div *ngIf="getMostPlants() as p" class="item">
+      <h2>Most Bomb Plants</h2>
+      <div class="stat">
+        <p>{{p.bombsPlanted}}</p>
+        <img src="../../../assets/bomb.png" alt="bomb" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+    <div *ngIf="getMostDefuses() as p" class="item">
+      <h2>Most Bomb Defuses</h2>
+      <div class="stat">
+        <p>{{p.bombsDefused}}</p>
+        <img src="../../../assets/bomb.png" alt="bomb" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+    <div *ngIf="getMostTeamFrags() as p" class="item">
+      <h2>Most Team Frags</h2>
+      <div class="stat">
+        <p>{{p.teamfrags}}</p>
+        <img src="../../../assets/damage.png" alt="bomb" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+    <div *ngIf="getMostSuicides() as p" class="item">
+      <h2>Most Suicides</h2>
+      <div class="stat">
+        <p>{{p.suicides}}</p>
+        <img src="../../../assets/damage.png" alt="bomb" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+  </div>
+</div>

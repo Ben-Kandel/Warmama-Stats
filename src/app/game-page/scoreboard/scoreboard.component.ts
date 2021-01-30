@@ -56,6 +56,8 @@ export class ScoreboardComponent implements OnInit {
           bombsDefused: 0,
           timeplayed: 0,
           numrounds: 0,
+          teamfrags: 0,
+          suicides: 0,
         });
       }
     }
@@ -78,6 +80,8 @@ export class ScoreboardComponent implements OnInit {
           bombsDefused: 0,
           timeplayed: 0,
           numrounds: 0,
+          teamfrags: 0,
+          suicides: 0,
         });
       }
     }
