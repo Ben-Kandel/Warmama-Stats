@@ -87,6 +87,11 @@
       flex-flow: column nowrap;
       align-items: center;
       justify-content: space-evenly;
+
+      app-details { //it feels weird to use an angular component as a css selector but I guess it works
+        margin-top: 3em;
+      }
+      
     }
     
     .no-game {

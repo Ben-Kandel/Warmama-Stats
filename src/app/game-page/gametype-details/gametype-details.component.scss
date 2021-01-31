@@ -1,11 +1,11 @@
 @import '../../../variables';
 
 .gametype-details {
-  border: 1px solid $green;
-  width: 50em;
-  height: 25em;
+  // border: 1px solid $green;
+  width: 40em;
+  height: 10em;
 
-  .bomb-game {
+  .game {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -18,7 +18,8 @@
       align-items: center;
       justify-content: center;
       margin: 10px;
-      border: 1px solid $green;
+      // border: 1px solid $orange;
+      
 
       * {
         margin: 0;
@@ -35,7 +36,7 @@
         align-items: center;
         justify-content: space-evenly;
         // border: 1px solid $green;
-        width: 5em;
+        
 
         p {
           font-size: 180%;

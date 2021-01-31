@@ -1,18 +1,18 @@
-<div *ngIf="game" class="gametype-details">
-  <div *ngIf="isGametype('bomb')" class="bomb-game">
+<div *ngIf="game" [ngSwitch]="game.gametype" class="gametype-details">
+  <div *ngIf="isGametype('bomb')" class="game">
     <div *ngIf="getMostPlants() as p" class="item">
       <h2>Most Bomb Plants</h2>
       <div class="stat">
         <p>{{p.bombsPlanted}}</p>
-        <img src="../../../assets/bomb.png" alt="bomb" width="30" height="30">
+        <img src="../../../assets/bomb.svg" alt="bomb" width="30" height="30">
       </div>      
       <p [innerHTML]="p.name | coloredName"></p>
     </div>
-    <div *ngIf="getMostDefuses() as p" class="item">
+    <div *ngIf="getMostDefusesFromAwards() as p" class="item">
       <h2>Most Bomb Defuses</h2>
       <div class="stat">
         <p>{{p.bombsDefused}}</p>
-        <img src="../../../assets/bomb.png" alt="bomb" width="30" height="30">
+        <img src="../../../assets/bomb.svg" alt="bomb" width="30" height="30">
       </div>      
       <p [innerHTML]="p.name | coloredName"></p>
     </div>
@@ -20,7 +20,7 @@
       <h2>Most Team Frags</h2>
       <div class="stat">
         <p>{{p.teamfrags}}</p>
-        <img src="../../../assets/damage.png" alt="bomb" width="30" height="30">
+        <img src="../../../assets/damage.png" alt="damage" width="30" height="30">
       </div>      
       <p [innerHTML]="p.name | coloredName"></p>
     </div>
@@ -28,7 +28,35 @@
       <h2>Most Suicides</h2>
       <div class="stat">
         <p>{{p.suicides}}</p>
-        <img src="../../../assets/damage.png" alt="bomb" width="30" height="30">
+        <img src="../../../assets/explosion.png" alt="explosion" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+  </div>
+  <div *ngIf="isGametype('ctf')" class="game">
+    <div *ngIf="getMostFlagCaps() as p" class="item">
+      <h2>Most Flag Captures</h2>
+      <div class="stat">
+        <p>{{p.flagsCapped}}</p>
+        <img src="../../../assets/flag.png" alt="flag" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+  </div>
+  <div *ngIf="isGametype('duel')" class="game">
+    <div *ngIf="getMostHealthGained() as p" class="item">
+      <h2>Most Health Gained</h2>
+      <div class="stat">
+        <p>{{p.healthTaken}}</p>
+        <img src="../../../assets/health-taken.png" alt="health gained" width="30" height="30">
+      </div>      
+      <p [innerHTML]="p.name | coloredName"></p>
+    </div>
+    <div *ngIf="getMostArmorGained() as p" class="item">
+      <h2>Most Armor Gained</h2>
+      <div class="stat">
+        <p>{{p.armorTaken}}</p>
+        <img src="../../../assets/armor-taken.png" alt="armor gained" width="30" height="30">
       </div>      
       <p [innerHTML]="p.name | coloredName"></p>
     </div>

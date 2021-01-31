@@ -21,7 +21,7 @@ export class GametypeDetailsComponent implements OnInit {
 
   getMostPlants(): Player {
     let answer: Player;
-    let highest = -1;
+    let highest = 0;
     this.game.players.forEach(p => {
       if(p.bombsPlanted > highest) {
         answer = p;
@@ -33,7 +33,7 @@ export class GametypeDetailsComponent implements OnInit {
 
   getMostDefuses(): Player {
     let answer: Player;
-    let highest = -1;
+    let highest = 0;
     this.game.players.forEach(p => {
       if(p.bombsDefused > highest) {
         answer = p;
@@ -45,7 +45,7 @@ export class GametypeDetailsComponent implements OnInit {
 
   getMostTeamFrags(): Player {
     let answer: Player;
-    let highest = -1;
+    let highest = 0;
     this.game.players.forEach(p => {
       if(p.teamfrags > highest) {
         answer = p;
@@ -57,11 +57,65 @@ export class GametypeDetailsComponent implements OnInit {
 
   getMostSuicides(): Player {
     let answer: Player;
-    let highest = -1;
+    let highest = 0;
     this.game.players.forEach(p => {
       if(p.suicides > highest) {
         answer = p;
         highest = p.suicides;
+      }
+    });
+    return answer;
+  }
+
+  getMostFlagCaps(): Player {
+    let answer: Player;
+    let highest = 0;
+    this.game.players.forEach(p => {
+      if(p.flagsCapped > highest) {
+        answer = p;
+        highest = p.flagsCapped;
+      }
+    });
+    return answer;
+  }
+
+  getMostDefusesFromAwards(): Player {
+    // so warmama isn't correctly recording these statistics, so I'm going to try a different way
+    // it seems to be correctly recording awards, and you get an award for defusing the bomb: 'Bomb defused!'
+    // so let's try to get the answer this way
+    let answer: Player;
+    let highest = 0;
+    this.game.players.forEach(p => {
+      p.awards.forEach(a => {
+        if(a.name == 'Bomb defused!' && a.count > highest) {
+          answer = p;
+          highest = a.count;
+        } 
+      });
+    });
+    answer.bombsDefused = highest;
+    return answer;
+  }
+
+  getMostHealthGained(): Player {
+    let answer: Player;
+    let highest = 0;
+    this.game.players.forEach(p => {
+      if(p.healthTaken > highest) {
+        answer = p;
+        highest = p.healthTaken;
+      }
+    });
+    return answer;
+  }
+
+  getMostArmorGained(): Player {
+    let answer: Player;
+    let highest = 0;
+    this.game.players.forEach(p => {
+      if(p.armorTaken > highest) {
+        answer = p;
+        highest = p.armorTaken;
       }
     });
     return answer;

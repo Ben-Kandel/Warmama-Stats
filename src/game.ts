@@ -22,8 +22,11 @@ export interface Player {
   gaTaken: number;
   mhTaken: number;
   uhTaken: number;
+  healthTaken: number;
+  armorTaken: number;
   bombsPlanted: number;
   bombsDefused: number;
+  flagsCapped: number;
   timeplayed: number;
   numrounds: number;
   teamfrags: number;
