@@ -1,4 +1,4 @@
-<div *ngIf="game" [ngSwitch]="game.gametype" class="gametype-details">
+<div *ngIf="game" class="gametype-details">
   <div *ngIf="isGametype('bomb')" class="game">
     <div *ngIf="getMostPlants() as p" class="item">
       <h2>Most Bomb Plants</h2>
