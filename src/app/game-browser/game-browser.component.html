@@ -1,0 +1,45 @@
+<div id="parent">
+  <!-- so this contains 3 things: the list of games, the filter options, and the hover preview -->
+  <div id="top-box">
+    <div id="sort-form">
+
+    </div>
+    <div id="hover-preview">
+
+    </div>
+  </div>
+  <div id="bottom-box">
+    <div id="game-list">
+      <table>
+        <thead>
+          <tr class="target">
+            <th class="index">#</th>
+            <th class="date">Date</th>
+            <th class="length">Game Length</th>
+            <th class="hostname">Server Name</th>
+            <th class="gametype">Gametype</th>
+            <th class="map">Map</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let game of games; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{game.date}}</td>
+            <td>{{game.length}}</td>
+            <td [innerHTML]="game.hostname | coloredName"></td>
+            <td>{{game.gametype}}</td>
+            <td>{{game.map}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="list-controls">
+      <div (click)="nextPage()" class="item">
+        <p>
+          Next
+          <img src="../../assets/good-arrow.png" alt="next page" width="30" height="30">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

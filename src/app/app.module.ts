@@ -20,6 +20,7 @@ import { SearchFormComponent } from './browser-page/search-form/search-form.comp
 import { GameTableComponent } from './browser-page/game-table/game-table.component';
 import { GamePreviewComponent } from './browser-page/game-preview/game-preview.component';
 import { GametypeDetailsComponent } from './game-page/gametype-details/gametype-details.component';
+import { GameBrowserComponent } from './game-browser/game-browser.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GametypeDetailsComponent } from './game-page/gametype-details/gametype-
     GameTableComponent,
     GamePreviewComponent,
     GametypeDetailsComponent,
+    GameBrowserComponent,
   ],
   imports: [
     BrowserModule,

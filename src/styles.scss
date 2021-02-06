@@ -8,13 +8,61 @@
   color: $gray;
 }
 
-html, body {
-  height: 100em;
-  margin: 0;
-  padding: 0;
+// html, body {
+//   height: 100em;
+//   margin: 0;
+//   padding: 0;
+// }
+
+html, body, header, footer, hgroup, nav, article, section, figure, 
+figcaption, h1, h2, h3, ul, li, body, div, p, img {
+   margin: 0;
+   padding: 0;
+   font-size: 100%;
+   vertical-align: baseline;
+   border: 0;
 }
 
 .coloredname {
   background-color: transparent;
 }
 
+.black {
+  color: black;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: rgb(17, 221, 17);
+}
+
+.yellow {
+  color: yellow;
+}
+
+.blue {
+  color: rgb(8, 8, 214);
+}
+
+.cyan {
+  color: cyan;
+}
+
+.pink {
+  color: rgb(240, 46, 207);
+}
+
+.white {
+  color: white;
+}
+
+.orange {
+  color: rgb(199, 132, 8);
+}
+
+.gray {
+  color: gray;
+}

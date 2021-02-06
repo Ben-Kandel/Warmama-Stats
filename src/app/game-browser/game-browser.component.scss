@@ -1,0 +1,127 @@
+@import '../../variables';
+
+#parent {
+  width: 110em;
+  height: 50em;
+  // border: 1px solid $green;
+  margin-top: 5px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  #top-box {
+    width: 100%;
+    height: 15em;
+    
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    #hover-preview {
+      flex: 1; // the baseline size
+      height: 100%; // we fix the height to be 100%
+      border: 1px solid blue;
+    }
+
+    #sort-form {
+      flex: 2; // this box is twice the length size of the baseline
+      height: 100%; // we fix the height to be 100%
+      border: 1px solid red;
+    }
+
+  }
+
+  #bottom-box {
+    width: 100%;
+    height: 100%; // its height is entirely dependent on the height of #top-box
+    // border: 1px solid yellow;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    #game-list {
+      width: 100%;
+      flex: 4;
+
+      table {
+        height: 100%;
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: left;
+    
+        tr:nth-child(even)  td {
+          background-color: $lighter-blue;
+        }
+    
+        .target { //the first row
+          // border: 2px solid $green;
+        }
+    
+        tr:last-child td {
+          border: none;
+        }
+        
+        tr:hover {
+          background-color: $green;
+        }
+    
+        tr:hover td {
+          background-color: transparent;
+        }
+        
+        .index {
+          width: 2%;
+        }
+
+        .date {
+          width: 10%;
+        }
+
+        .length {
+          width: 10%;
+        }
+
+        .hostname {
+          width: 30%;
+        }
+
+        .gametype {
+          width: 10%;
+        }
+
+        .map {
+          width: 10%;
+        }
+
+      }
+
+    }
+
+    #list-controls {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .item {
+        padding: 5px;
+        border-radius: 15px;
+        border: 2px solid $green;        
+        font-size: 200%;
+        &:hover {
+          border: 2px solid $gray;
+        }
+      }
+      
+      img {
+        vertical-align: middle;
+      }
+    }
+
+  }
+
+}
