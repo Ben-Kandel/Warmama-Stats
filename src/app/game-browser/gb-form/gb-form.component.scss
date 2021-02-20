@@ -1,0 +1,40 @@
+.form {
+  border: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  text-align: center;
+  // width: 100%;
+  // height: 100%;
+
+  h2 {
+    font-size: 200%;
+  }
+
+  mat-chip {
+    font-size: 115%;
+  }
+
+  
+
+  .gametype-selector {
+    // border: 1px solid red;
+    // width:10em;
+    height: 100%;
+    width: 25em;
+  }
+  
+  .map-selector {
+    height: 100%;
+  }
+
+  .player-selector {
+    height: 100%;
+    width: 10em;
+  }
+
+  .form-stuff {
+    border: 1px solid blue;
+  }
+
+}

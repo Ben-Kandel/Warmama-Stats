@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 
@@ -21,6 +23,9 @@ import { GameTableComponent } from './browser-page/game-table/game-table.compone
 import { GamePreviewComponent } from './browser-page/game-preview/game-preview.component';
 import { GametypeDetailsComponent } from './game-page/gametype-details/gametype-details.component';
 import { GameBrowserComponent } from './game-browser/game-browser.component';
+import { GbFormComponent } from './game-browser/gb-form/gb-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlayerBrowserComponent } from './player-browser/player-browser.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +43,18 @@ import { GameBrowserComponent } from './game-browser/game-browser.component';
     GamePreviewComponent,
     GametypeDetailsComponent,
     GameBrowserComponent,
+    GbFormComponent,
+    PlayerBrowserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatChipsModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

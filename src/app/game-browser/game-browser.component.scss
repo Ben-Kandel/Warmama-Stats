@@ -28,6 +28,9 @@
       flex: 2; // this box is twice the length size of the baseline
       height: 100%; // we fix the height to be 100%
       border: 1px solid red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
   }
@@ -105,9 +108,11 @@
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
 
       .item {
+        margin-left: 3em;
+        margin-right: 3em;
         padding: 5px;
         border-radius: 15px;
         border: 2px solid $green;        
@@ -115,6 +120,14 @@
         &:hover {
           border: 2px solid $gray;
         }
+
+        .left {
+          transform: scaleX(-1);
+        }
+      }
+
+      .page-num {
+        font-size: 250%;
       }
       
       img {

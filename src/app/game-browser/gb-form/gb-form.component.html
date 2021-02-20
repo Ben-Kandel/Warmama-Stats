@@ -1,0 +1,28 @@
+<form [formGroup]="searchForm" (keydown)="keyPressed($event)" class="form">
+  <div class="gametype-selector">
+    <h2>Gametype</h2>
+    <mat-chip-list [multiple]="false">
+      <mat-chip *ngFor="let gt of gametypes" color="primary"
+      [selected]="gt.selected"
+      (click)="toggleChip(gt)">
+        {{gt.name}}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="map-selector">
+    <h2>Map</h2>
+    <input formControlName="map" type="text" placeholder="enter map name">
+  </div>
+  <div class="player-selector">
+    <h2>Player</h2>
+    <input formControlName="player" type="text" placeholder="enter player name">
+    <mat-radio-group>
+      <mat-radio-button value="exact">Exact Match</mat-radio-button>
+      <mat-radio-button value="fuzzy">Fuzzy Match</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <!-- <div class="form-stuff">
+    <label>Map: </label>
+    <input formControlName="map" type="text" placeholder="enter map">
+  </div> -->
+</form>

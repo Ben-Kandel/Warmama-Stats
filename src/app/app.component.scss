@@ -12,6 +12,10 @@
     border: 1px solid $green;
     padding: 2px;
 
+    a {
+      color: $gray;
+    }
+
     ul {
       list-style-type: none;
       margin: 0;

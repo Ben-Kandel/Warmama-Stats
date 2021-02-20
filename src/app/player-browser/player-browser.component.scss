@@ -1,0 +1,96 @@
+@import '../../variables';
+
+#parent {
+  width: 110em;
+  height: 50em;
+  border: 1px solid $green;
+  margin-top: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  .player-list {
+    flex: 1; // takes care of width
+    height: 100%;
+    border: 1px solid red;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+
+    .item {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      font-size: 180%;
+      border-top: 2px solid transparent;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        border-top: 2px solid $green;
+        border-bottom: 2px solid $green;
+      }
+    }
+
+    .header {
+      font-size: 250%;
+      color: $orange;
+    }
+
+  }
+
+  .player-details {
+    flex: 3; // takes care of width
+    height: 100%;
+    border: 1px solid blue;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    .header {
+      text-align: center;
+      h2 {
+        font-size: 240%;
+      }
+
+      .game-count {
+        font-size: 130%;
+        margin-bottom: 5px;
+        color: $green;
+      }
+
+      .matched-names {
+        color: $green;
+        margin-bottom: 5px;
+      }
+      // font-size: 150%;
+    }
+
+    .pstats {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
+      width: 50%;
+      margin-bottom: 10px;
+
+      .item {
+        text-align: center;
+        .title { 
+          font-size: 150%; 
+          color: $orange;
+        }
+        .total {font-size: 130%; }
+        .desc { color: $green; }
+      }
+    }
+
+    h3 {
+      font-size: 200%;
+    }
+
+    table {
+      text-align: left;
+    }
+
+  }
+
+}

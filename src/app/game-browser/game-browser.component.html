@@ -2,7 +2,7 @@
   <!-- so this contains 3 things: the list of games, the filter options, and the hover preview -->
   <div id="top-box">
     <div id="sort-form">
-
+      <app-gb-form (searchClicked)="onSubmit($event)"></app-gb-form>
     </div>
     <div id="hover-preview">
 
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let game of games; let i = index">
-            <td>{{i+1}}</td>
+            <td>{{(pageNum - 1) * pageSize + i}}</td>
             <td>{{game.date}}</td>
             <td>{{game.length}}</td>
             <td [innerHTML]="game.hostname | coloredName"></td>
@@ -34,6 +34,15 @@
       </table>
     </div>
     <div id="list-controls">
+      <div (click)="prevPage()" class="item">
+        <p>
+          <img src="../../assets/good-arrow.png" alt="previous page" width="30" height="30" class="left">
+          Prev
+        </p>
+      </div>
+      <div class="page-num">
+        <p>{{pageNum}}</p>
+      </div>
       <div (click)="nextPage()" class="item">
         <p>
           Next

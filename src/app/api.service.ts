@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Game } from './testing';
+import { AdvancedPlayerPreview, Game, PlayerPreview } from './testing';
 import { HttpClient } from '@angular/common/http';
 
-let DEBUG: boolean = false;
-let testURL = 'http://localhost:3000/api/games/5';
+let DEBUG: boolean = true;
+let testURL = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +16,81 @@ export class ApiService {
     let test = (query: string): string => { // calculate whether the leading '?' character should be in the url
       return (query == '') ? '' : '?' + query;
     }
+
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/games${test(query)}`
+    }else {
+      url = `/api/games${test(query)}`;
+    }
+
     try {
-      let x = await this.http.get<Game[]>('http://localhost:3000/api/games').toPromise();
-      x.forEach(game => {
-        console.log(game);
-      });
+      let x = await this.http.get<Game[]>(url).toPromise();
       return x;
     }catch(err) {
       console.log(err);
     }
   }
+
+  async getGametypes(): Promise<string[]> {
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/gametypes`;
+    }else {
+      url = '/api/gametypes';
+    }
+    try {
+      let x = await this.http.get<string[]>(url).toPromise();
+      return x;
+    }catch(err) {
+      console.log(err);
+    }
+  }
+  
+
+  async getAllPlayers(): Promise<PlayerPreview[]> {
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/players`;
+    }else {
+      url = '/api/players';
+    }
+    try {
+      let x = await this.http.get<PlayerPreview[]>(url).toPromise();
+      return x;
+    }catch(err) {
+      console.log(err);
+    }
+  }
+
+  async getRecentPlayerGames(name: string): Promise<Game[]> {
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/recentGames/${name}`;
+    }else{
+      url = `/api/recentGames/${name}`;
+    }
+    try {
+      let x = await this.http.get<Game[]>(url).toPromise();
+      return x;
+    }catch(err) {
+      console.log(err);
+    }
+  }
+
+  async getPlayerInfo(name: string): Promise<AdvancedPlayerPreview> {
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/playerInfo/${name}`;
+    }else{
+      url = `/api/playerInfo/${name}`;
+    }
+    try {
+      let x = await this.http.get<AdvancedPlayerPreview>(url).toPromise();
+      return x;
+    }catch(err) {
+      console.log(err);
+    }
+  }
+
 }

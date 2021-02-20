@@ -1,18 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import './variables';
-
-*{
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background-color: $blue;
-  color: $gray;
-}
-
-// html, body {
-//   height: 100em;
-//   margin: 0;
-//   padding: 0;
-// }
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 html, body, header, footer, hgroup, nav, article, section, figure, 
 figcaption, h1, h2, h3, ul, li, body, div, p, img {
@@ -65,4 +54,12 @@ figcaption, h1, h2, h3, ul, li, body, div, p, img {
 
 .gray {
   color: gray;
+}
+
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: $blue;
+  color: $gray;
 }
