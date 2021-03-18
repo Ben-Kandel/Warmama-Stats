@@ -13,12 +13,9 @@
   </div>
   <div *ngIf="selectedPlayer; else elseBlock" class="player-details">
     <div class="header">
-      <h2>{{selectedPlayer.name}}</h2>
-      <p class="game-count">{{selectedPlayer.game_count}} games</p>
+      <h2>{{selectedPlayer.name}} <span class="game-count">({{selectedPlayer.game_count}})</span></h2>
       <p class="matched-names">
-        <span *ngFor="let name of selectedPlayerInfo.matchedNames">
-          {{name}},
-        </span>
+        {{getAliases()}}
       </p>
     </div>
     <div class="pstats">
@@ -40,16 +37,16 @@
         <th>Gametype</th>
         <th>Map</th>
         <th>Date</th>
-        <th>Game Length</th>
       </tr>
       <tr *ngFor="let game of selectedPlayerInfo.recentGames">
         <td [innerHTML]="game.hostname | coloredName"></td>
         <td>{{game.gametype}}</td>
         <td>{{game.map}}</td>
         <td>{{game.date}}</td>
-        <td>{{game.length}}</td>
+        
       </tr>
     </table>
+    <p (click)="navigateToPlayerPage();" class="full-page-link">Link to full player page</p>
   </div>
   <ng-template #elseBlock>
     <div class="player-details">

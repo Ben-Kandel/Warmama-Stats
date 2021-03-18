@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AdvancedPlayerPreview, Game, PlayerPreview } from './testing';
+import { AdvancedPlayerPreview, Game, PlayerPreview, FullGame, Player, Weapon } from './testing';
 import { HttpClient } from '@angular/common/http';
 
 let DEBUG: boolean = true;
@@ -91,6 +91,26 @@ export class ApiService {
     }catch(err) {
       console.log(err);
     }
+  }
+
+  async getFullGame(gameID: string): Promise<FullGame> {
+    let url: string;
+    let id = Number(gameID);
+    if(!Number.isInteger(id)) { // get rid of invalid ids
+      return;
+    }
+    if(DEBUG) {
+      url = `${testURL}/api/games/${gameID}`
+    }else {
+      url = `/api/games/${gameID}`;
+    }
+    try {
+      let x: FullGame = await this.http.get<FullGame>(url).toPromise();
+      return x;
+    } catch(err) {
+      console.log(err);
+    }
+
   }
 
 }

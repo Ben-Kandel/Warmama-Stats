@@ -46,6 +46,20 @@
     flex-flow: column nowrap;
     align-items: center;
 
+    .full-page-link {
+      border: 2px solid transparent;
+      font-size: 150%;
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      margin-top: 5px;
+      
+      &:hover {
+        background-color: $green;
+        border: 2px solid $gray;
+      }
+      
+    }
+
     .header {
       text-align: center;
       h2 {
@@ -53,7 +67,6 @@
       }
 
       .game-count {
-        font-size: 130%;
         margin-bottom: 5px;
         color: $green;
       }
@@ -89,6 +102,22 @@
 
     table {
       text-align: left;
+      width: 75%;
+      height: 20em;
+      font-size: 120%;
+      border: 2px solid $gray;
+      border-collapse: collapse;
+      margin-top: 5px;
+
+      th {
+        color: $orange;
+      }
+
+      th, td {
+        border-top: 1px solid $green;
+        border-bottom: 1px solid $green;
+      }
+      
     }
 
   }

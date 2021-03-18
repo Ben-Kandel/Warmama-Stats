@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Game, PlayerPreview, AdvancedPlayerPreview } from '../testing';
 
@@ -13,7 +14,7 @@ export class PlayerBrowserComponent implements OnInit {
   selectedPlayer: PlayerPreview;
   selectedPlayerInfo: AdvancedPlayerPreview;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.initialFetch();
@@ -35,4 +36,15 @@ export class PlayerBrowserComponent implements OnInit {
     this.selectedPlayer = p;
     this.fetchRecentGames(p.name);
   }
+
+  getAliases() {
+    return this.selectedPlayerInfo.matchedNames.join(", ");
+  }
+
+  navigateToPlayerPage() {
+    console.log('test');
+    // this.selectedPlayer.name;
+    this.router.navigate(['/player/test']);
+  }
+
 }

@@ -6,7 +6,12 @@
         <a routerLink="/home">Home</a>
       </li>
       <li>
-        <a routerLink="/browser">Browser</a>
+        <button mat-button color="primary" [matMenuTriggerFor]="menu">Browser</button>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item href="/browser/games">Games</a>
+          <a mat-menu-item href="/browser/players">Players</a>
+        </mat-menu>
+        <!-- <a routerLink="/browser">Browser</a> -->
       </li>
       <li>
         <a routerLink="/game">Game</a>
