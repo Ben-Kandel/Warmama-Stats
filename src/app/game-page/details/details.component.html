@@ -22,15 +22,15 @@
           <div class="item">
             <p><span class="num">{{hover.duel_stats.armor_taken}}</span> Armor</p>
             <div class="armor">
-              <img *ngFor="let item of [].constructor(hover.duel_stats.ra_taken)" src="../../../assets/ra.png" width="36" height="36">
-              <img *ngFor="let item of [].constructor(hover.duel_stats.ya_taken)" src="../../../assets/ya.png" width="36" height="36">
-              <img *ngFor="let item of [].constructor(hover.duel_stats.ga_taken)" src="../../../assets/ga.png" width="36" height="36">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.ra_taken)" src="../../../assets/ra.png" width="36" height="36" alt="red armor">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.ya_taken)" src="../../../assets/ya.png" width="36" height="36" alt="yellow armor">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.ga_taken)" src="../../../assets/ga.png" width="36" height="36" alt="green armor">
             </div>
           </div>
           <div class="item">
             <p><span class="num">{{hover.duel_stats.health_taken}}</span> Health</p>
             <div class="health">
-              <img *ngFor="let item of [].constructor(hover.duel_stats.mh_taken)" src="../../../assets/mega-health.png" width="36" height="36">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.mh_taken)" src="../../../assets/mega-health.png" width="36" height="36" alt="mega health">
             </div>
           </div>
         </div>
