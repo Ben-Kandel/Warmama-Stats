@@ -1,5 +1,3 @@
-import { NumberSymbol } from "@angular/common";
-
 export interface Game {
   id: number;
   gametype: string;
@@ -38,6 +36,16 @@ export interface Player {
   dmg_given: number;
   dmg_taken: number;
   weapons: Weapon[];
+  duel_stats?: DuelStats;
+}
+
+export interface DuelStats {
+  ga_taken: number;
+  ya_taken: number;
+  ra_taken: number;
+  mh_taken: number;
+  health_taken: number;
+  armor_taken: number;
 }
 
 export interface Weapon {

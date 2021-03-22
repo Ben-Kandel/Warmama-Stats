@@ -1,8 +1,8 @@
 <div *ngIf="game" class="scoreboard">
   <div *ngIf="game.teamgame == 0" class="non-team-game">
     <!-- if it's not a team game, then it's either a duel game or some type of ffa, and I want to show different things for these cases -->
-    <div *ngIf="gametypeLike('duel')" class="duel">
-      <div class="player winner box" *ngIf="sortPlayersByScore(game.players)[0] as player"
+    <div *ngIf="gametypeLike('duel'); else notDuel" class="duel">
+      <div class="player box" *ngIf="sortPlayersByScore(game.players)[0] as player"
       (mouseover)="onHover(player)" (mouseout)="offHover()">
         <p class="name" [innerHTML]="player.colored_name | coloredName"></p>
         <p class="score">Score: {{player.score}}</p>
@@ -16,19 +16,21 @@
         <p class="kd">KD: {{player.frags}}/{{player.deaths}}</p>
       </div>
     </div>
-    <div *ngIf="gametypeLike('ffa')" class="ffa">
-      <div *ngFor="let player of sortPlayersByScore(game.players); index as i" class="entry"
-      (mouseover)="onHover(player)" (mouseout)="offHover()">
-        <p [class.first]="i == 0"
-          [class.second]="i == 1"
-          [class.third]="i == 2"
-          [class.other]="i != 0 && i != 1 && i != 2">
-            {{i+1}}.
-          </p>
-          <p [innerHTML]="player.colored_name | coloredName"></p>
-          <p class="score">({{player.frags}}/{{player.deaths}})</p>
+    <ng-template #notDuel>
+      <div class="not-duel">
+        <div *ngFor="let player of sortPlayersByScore(game.players); index as i" class="entry"
+        (mouseover)="onHover(player)" (mouseout)="offHover()">
+          <p [class.first]="i == 0"
+            [class.second]="i == 1"
+            [class.third]="i == 2"
+            [class.other]="i != 0 && i != 1 && i != 2">
+              {{i+1}}.
+            </p>
+            <p [innerHTML]="player.colored_name | coloredName"></p>
+            <p class="score">({{player.frags}}/{{player.deaths}})</p>
+        </div>
       </div>
-    </div>
+    </ng-template>
   </div>
   <div *ngIf="game.teamgame == 1" class="team-game">
     <table *ngFor="let item of [].constructor(2); let i = index" class="team" [class.forbidden-table]="i == 0" [class.icy-table]="i == 1">

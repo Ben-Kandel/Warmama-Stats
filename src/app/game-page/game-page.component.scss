@@ -58,14 +58,18 @@
         width: 100%;
         height: 100%;
         flex: 1;
-        border: 1px solid red;
+        margin-right: 5px;
+        // border: 1px solid red;
       }
 
       app-details {
         width: 100%;
         height: 100%;
         flex: 1;
-        border: 1px solid blue;
+        // border: 1px solid blue;
+        border: 1px solid $green;
+        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+        margin-left: 5px;
       }
 
     }

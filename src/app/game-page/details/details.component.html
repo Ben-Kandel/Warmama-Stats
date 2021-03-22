@@ -1,14 +1,11 @@
 <div class="details">
   <div *ngIf="hover; else elseBlock" class="hover-info">
     <h2 [innerHTML]="hover.colored_name | coloredName"></h2>
-    <div *ngIf="game.teamgame == 0">
-      <p>not a team game</p>
-    </div>
-    <div *ngIf="game.teamgame == 1" class="teamgame">
+    <div class="basic-stats">
       <div class="damage">
         <p class="title">Damage</p>
-        <p>Dealt: {{hover.dmg_given}}</p>
-        <p>Taken: {{hover.dmg_taken}}</p>
+        <p>Dealt: {{hover.dmg_given | number}}</p>
+        <p>Taken: {{hover.dmg_taken | number}}</p>
         <p *ngIf="getDamageRatio(hover) as num">Ratio: <span [class.green]="num == 1" [class.green]="num > 1"  [class.red]="num < 1">{{num | number: '1.2-2'}}</span></p>
       </div>
       <div class="frags">
@@ -18,11 +15,104 @@
         <p *ngIf="getKDRatio(hover) as num">Ratio: <span [class.green]="num == 1" [class.green]="num > 1" [class.red]="num < 1">{{num | number: '1.2-2'}}</span></p>
       </div>
     </div>
+    <div [ngSwitch]="parseGametype()" class="gametype-stats">
+      <div *ngSwitchCase="'duel'" class="duel-stats">
+        <p class="title">Duel Pickups</p>
+        <div class="wrapper">
+          <div class="item">
+            <p><span class="num">{{hover.duel_stats.armor_taken}}</span> Armor</p>
+            <div class="armor">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.ra_taken)" src="../../../assets/ra.png" width="36" height="36">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.ya_taken)" src="../../../assets/ya.png" width="36" height="36">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.ga_taken)" src="../../../assets/ga.png" width="36" height="36">
+            </div>
+          </div>
+          <div class="item">
+            <p><span class="num">{{hover.duel_stats.health_taken}}</span> Health</p>
+            <div class="health">
+              <img *ngFor="let item of [].constructor(hover.duel_stats.mh_taken)" src="../../../assets/mega-health.png" width="36" height="36">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div *ngSwitchCase="'ffa'">
+
+      </div>
+      <div *ngSwitchCase="'ca'">
+
+      </div>
+      <div *ngSwitchDefault>
+        <p>I'm not sure.</p>
+      </div>
+    </div>
   </div>
   <ng-template #elseBlock>
-    <!-- showing general information about the game -->
-    <div class="game-info">
-
+    <div *ngIf="game.teamgame == 0" class="general-info">
+      <div [ngSwitch]="parseGametype()">
+        <!-- only duel exists for now -->
+        <div *ngSwitchCase="'duel'" class="game">
+          <div *ngIf="getMostArmorGained() as p" class="item">
+            <p class="title">Most Armor Gained</p>
+            <div class="stat">
+              <p>{{p.duel_stats.armor_taken}}</p>
+              <img src="../../../assets/armor-taken.png" alt="armor gained" width="30" height="30">
+            </div>      
+            <p class="name" [innerHTML]="p.colored_name | coloredName"></p>
+          </div>
+          <div *ngIf="getMostHealthGained() as p" class="item">
+            <p class="title">Most Health Gained</p>
+            <div class="stat">
+              <p>{{p.duel_stats.health_taken}}</p>
+              <img src="../../../assets/health-taken.png" alt="health gained" width="30" height="30">
+            </div>      
+            <p class="name" [innerHTML]="p.colored_name | coloredName"></p>
+          </div>
+        </div>
+        <div *ngSwitchDefault>
+          <p>I'm not sure.</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="game.teamgame == 1" class="general-info">
+      <div class="game">
+        <div class="left">
+          <div *ngIf="getMostDamageGiven() as p" class="entry">
+            <p class="title">Top Damage</p>
+            <p class="name"><span [innerHTML]="p.colored_name | coloredName"></span> : <span class="num">{{p.dmg_given | number}}</span> dmg given</p>
+          </div>
+          <div *ngIf="getMostDamageTaken() as p" class="entry">
+            <p class="title">Best Tank</p>
+            <p class="name"><span [innerHTML]="p.colored_name | coloredName"></span> : <span class="num">{{p.dmg_taken | number}}</span> dmg received</p>
+          </div>
+          <div *ngIf="getMostFrags() as p" class="entry">
+            <p class="title">Top Frags</p>
+            <p class="name"><span [innerHTML]="p.colored_name | coloredName"></span> : <span class="num">{{p.frags}}</span> frags</p>
+          </div>
+        </div>
+        <div class="right">
+          <div *ngIf="getHighestEB() as p" class="entry">
+            <p class="title">Sharpshooter</p>
+            <p class="name" *ngIf="getWeaponByName(p, 'EB') as weap">
+              <span [innerHTML]="p.colored_name | coloredName"></span>
+               : 
+              <span>{{getAccuracy(weap) | number:'2.0-2'}}%</span>
+              <img src="../../../assets/electrobolt.png" width="35" height="35" alt="electrobolt">
+              <span class="num">({{weap.shots_hit}} / {{weap.shots_fired}})</span>
+            </p>
+          </div>
+          <div *ngIf="getHighestLG() as p" class="entry">
+            <p class="title">Steady Aim</p>
+            <p class="name" *ngIf="getWeaponByName(p, 'LG') as weap">
+              <span [innerHTML]="p.colored_name | coloredName"></span>
+               : 
+              <span>{{getAccuracy(weap) | number:'2.0-2'}}%</span>
+              <img src="../../../assets/lasergun.png" width="35" height="35" alt="lasergun">
+              <span class="num">({{weap.shots_hit}} / {{weap.shots_fired}})</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </ng-template>
 </div>
