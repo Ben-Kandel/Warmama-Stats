@@ -6,7 +6,7 @@
 Browse thousands of games, filter by specific gametypes, maps, and players, and get an in-depth view into each player's score, damage, accuracy, and more!
 
 
-This project is very much a work in progress. If you have any suggestions, please don't hesitate to contact me :)
+Everything is currently being re-written, you can look at the upgrade-everything branch to check it out. 
 
 
 ## TODO
