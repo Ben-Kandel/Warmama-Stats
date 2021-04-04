@@ -1,128 +1,151 @@
 CREATE DATABASE IF NOT EXISTS testing;
 use testing;
 
-CREATE TABLE IF NOT EXISTS games (
+CREATE TABLE games (
 	id INT auto_increment PRIMARY KEY,
-    gametype VARCHAR(30),
-    map VARCHAR(30),
-    hostname VARCHAR(60),
-    teamgame BOOLEAN NOT NULL,
-	instagib BOOLEAN NOT NULL,
-    date DATE NOT NULL,
-    length TIME NOT NULL
+  gametype VARCHAR(30) NOT NULL,
+  map VARCHAR(30) NOT NULL,
+  hostname VARCHAR(60) NOT NULL,
+  teamgame BOOLEAN NOT NULL,
+  instagib BOOLEAN NOT NULL,
+  date DATE NOT NULL,
+  length TIME NOT NULL,
+  UNIQUE INDEX (id),
+  INDEX (gametype),
+  INDEX (map),
+  INDEX (hostname)
 );
 
-CREATE TABLE IF NOT EXISTS players (
+CREATE TABLE players (
 	id INT auto_increment PRIMARY KEY,
-    name VARCHAR(30),
-    colored_name VARCHAR(30),
-    game_id INT,
-    team_num INT
+  game_id INT NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  colored_name VARCHAR(30) NOT NULL,
+  team_num INT,
+  UNIQUE INDEX (id),
+  INDEX (game_id)
 );
 
-CREATE TABLE IF NOT EXISTS teams (
-	game_id INT,
-    t1_score INT,
-    t2_score INT
+CREATE TABLE teams (
+	game_id INT NOT NULL,
+  t1_score INT NOT NULL,
+  t2_score INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS p_stats (
-	player_id INT,
-    game_id INT,
-    score INT NOT NULL,
-    frags INT NOT NULL,
-    deaths INT NOT NULL,
-    dmg_given INT NOT NULL,
-    dmg_taken INT NOT NULL
+CREATE TABLE p_stats (
+	player_id INT NOT NULL,
+  game_id INT NOT NULL,
+  score INT NOT NULL,
+  frags INT NOT NULL,
+  deaths INT NOT NULL,
+  dmg_given INT NOT NULL,
+  dmg_taken INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS duel_stats (
-	game_id INT,
-    player_id INT,
-    ga_taken INT NOT NULL,
-    ya_taken INT NOT NULL,
-    ra_taken INT NOT NULL,
-    mh_taken INT NOT NULL,
-    health_taken INT NOT NULL,
-    armor_taken INT NOT NULL
+CREATE TABLE duel_stats (
+	game_id INT NOT NULL,
+  player_id INT NOT NULL,
+  ga_taken INT NOT NULL,
+  ya_taken INT NOT NULL,
+  ra_taken INT NOT NULL,
+  mh_taken INT NOT NULL,
+  health_taken INT NOT NULL,
+  armor_taken INT NOT NULL
 );
 
--- CREATE TABLE IF NOT EXISTS bomb_stats (
+-- CREATE TABLE  bomb_stats (
 -- 	
 -- );
 
--- CREATE TABLE IF NOT EXISTS ctf_stats (
+-- CREATE TABLE  ctf_stats (
 -- 	
 -- );
 
-CREATE TABLE IF NOT EXISTS RL (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE RL (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS EB (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE EB (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS LG (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE LG (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS GL (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE GL (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS MG (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE MG (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS PG (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE PG (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS RG (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE RG (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
-CREATE TABLE IF NOT EXISTS GB (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    damage INT,
-    frags INT
+CREATE TABLE GB (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  damage INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
 );
 
 -- instagun has one less columnn 
-CREATE TABLE IF NOT EXISTS IG (
-	player_id INT,
-    shots_hit INT,
-    shots_fired INT,
-    frags INT
+CREATE TABLE IG (
+	player_id INT NOT NULL,
+  shots_hit INT NOT NULL,
+  shots_fired INT NOT NULL,
+  frags INT NOT NULL,
+  INDEX (player_id)
+);
+
+CREATE TABLE awards (
+  game_id INT NOT NULL, 
+  player_id INT NOT NULL, 
+  name VARCHAR(30) NOT NULL,
+  count INT NOT NULL, 
+  INDEX (game_id)
 );

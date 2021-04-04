@@ -3,29 +3,43 @@
 .details {
   width: 100%;
   height: 100%;
+  display: flex;
 
   .hover-info {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    height: 100%;
+    // height: 100%;
+    // border: 1px solid red;  
+    align-self: center;
+    margin: auto;
+
 
     h2 {
-      font-size: 200%;
+      font-size: 250%;
     }
 
     .basic-stats {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-evenly;
-      width: 20em; // basically how much space is in between 'damage' and 'frags' part
+      width: 25em; // basically how much space is in between 'damage' and 'frags' part
       text-align: center;
       
+      font-size: 150%;
 
       .title {
         font-size: 150%;
         color: $orange;
       }
+
+      
+
+    }
+
+    .awards {
+      text-align: center;
+      font-size: 150%;
     }
 
     .gametype-stats {

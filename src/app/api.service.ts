@@ -47,13 +47,16 @@ export class ApiService {
     }
   }
   
+  async getPlayers(query: string): Promise<PlayerPreview[]> {
+    let test = (query: string): string => { // calculate whether the leading '?' character should be in the url
+      return (query == '') ? '' : '?' + query;
+    }
 
-  async getAllPlayers(): Promise<PlayerPreview[]> {
     let url: string;
     if(DEBUG) {
-      url = `${testURL}/api/players`;
+      url = `${testURL}/api/players${test(query)}`
     }else {
-      url = '/api/players';
+      url = `/api/players${test(query)}`;
     }
     try {
       let x = await this.http.get<PlayerPreview[]>(url).toPromise();

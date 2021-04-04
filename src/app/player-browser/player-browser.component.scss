@@ -1,13 +1,17 @@
 @import '../../variables';
 
 #parent {
-  width: 110em;
-  height: 50em;
-  border: 1px solid $green;
+  width: 95vw;
+  height: 85vh;
+  // border: 1px solid $green;
   margin-top: 5px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+
+  @media (max-width: 800px) {
+    flex-flow: column nowrap;
+  }
 
   .player-list {
     flex: 1; // takes care of width
@@ -17,23 +21,46 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
 
+    @media (max-width: 800px) {
+      width: 100%;
+      border: none;
+    }
+
     .item {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
       font-size: 180%;
-      border-top: 2px solid transparent;
-      border-bottom: 2px solid transparent;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
 
       &:hover {
-        border-top: 2px solid $green;
-        border-bottom: 2px solid $green;
+        border-top: 1px solid $green;
+        border-bottom: 1px solid $green;
+        background-color: $lighter-blue;
       }
     }
 
     .header {
       font-size: 250%;
       color: $orange;
+    }
+
+    .list-controls {
+      align-self: center; // align the list controls horizontally
+      margin-top: auto; // put the list controls at the bottom of the container
+      display: flex;
+      flex-flow: row nowrap;
+      img {
+        border: 1px solid transparent;
+        &:hover {
+          border: 1px solid $gray;
+        }
+      }
+
+      .left {
+        transform: scaleX(-1);
+      }
     }
 
   }
@@ -46,18 +73,9 @@
     flex-flow: column nowrap;
     align-items: center;
 
-    .full-page-link {
-      border: 2px solid transparent;
-      font-size: 150%;
-      text-decoration: underline;
-      text-decoration-skip-ink: none;
-      margin-top: 5px;
-      
-      &:hover {
-        background-color: $green;
-        border: 2px solid $gray;
-      }
-      
+    @media (max-width: 800px) {
+      width: 100%;
+      border: none;
     }
 
     .header {
@@ -71,11 +89,6 @@
         color: $green;
       }
 
-      .matched-names {
-        color: $green;
-        margin-bottom: 5px;
-      }
-      // font-size: 150%;
     }
 
     .pstats {
@@ -100,22 +113,23 @@
       font-size: 200%;
     }
 
-    table {
+    .recent-games {
       text-align: left;
       width: 75%;
       height: 20em;
       font-size: 120%;
-      border: 2px solid $gray;
+      border: 1px solid $gray;
       border-collapse: collapse;
       margin-top: 5px;
+      margin-bottom: 25px;
 
       th {
         color: $orange;
       }
 
-      th, td {
-        border-top: 1px solid $green;
-        border-bottom: 1px solid $green;
+
+      tr:hover {
+        background-color: $lighter-blue;
       }
       
     }

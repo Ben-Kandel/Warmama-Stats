@@ -1,7 +1,7 @@
 @import '../../variables';
 
 #parent {
-  width: 110em;
+  width: 95vw;
   height: 50em;
   // border: 1px solid $green;
   margin-top: 5px;
@@ -59,7 +59,7 @@
         }
     
         .target { //the first row
-          // border: 2px solid $green;
+          border: 2px solid $green;
         }
     
         tr:last-child td {

@@ -43,6 +43,7 @@ async function insertGameRow(conn, gameData, filename) {
   let instagib = (gameData.match.instagib) ? gameData.match.instagib : 0;
   //warmama match reports files come in names like:
   // YYYY-MM-DD-something.json
+  // that means we can take the date right out of the file name
   let date = filename.slice(0, 10);
   let length = parseTime(gameData);
   let query = builder.insert('games', 'gametype', 'map', 'hostname', 'teamgame', 'instagib', 'date', 'length')
@@ -140,6 +141,19 @@ async function insertInstagibWeaponRow(conn, player_id, weaponData) {
   }
 }
 
+// insert awards row
+async function insertAwardsRow(conn, awardData, player_id, game_id) {
+  let name = awardData.name;
+  let count = awardData.count;
+  let query = builder.insert('awards', 'game_id', 'player_id', 'name', 'count')
+    .values([game_id, player_id, name, count]);
+  try {
+    conn.execute(query.toString());
+  }catch(err) {
+    console.log(err);
+  }
+}
+
 
 
 
@@ -208,6 +222,14 @@ async function main() {
           }
         }
       }
+
+      //now lets record their awards
+      if(playerData.awards) { // if this player has any awards
+        for(let award of playerData.awards) { // loop through each one
+          await insertAwardsRow(conn, award, player_id, game_id); // insert it
+        }
+      }
+
     }
   }
   console.log('DONE PROCESSING MATCH REPORTS.');

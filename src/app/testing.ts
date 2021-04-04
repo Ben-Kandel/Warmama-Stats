@@ -37,6 +37,7 @@ export interface Player {
   dmg_taken: number;
   weapons: Weapon[];
   duel_stats?: DuelStats;
+  awards?: Award[];
 }
 
 export interface DuelStats {
@@ -57,16 +58,16 @@ export interface Weapon {
 }
 
 export interface Award {
-  
+  name: string;
+  count: number;
 }
 
 export interface PlayerPreview {
-  name: string;
+  colored_name: string;
   gameCount: number;
 }
 
 export interface AdvancedPlayerPreview {
-  matchedNames: string[];
   recentGames: Game[];
   pstats: {
     total_score: number;

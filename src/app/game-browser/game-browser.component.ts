@@ -14,10 +14,10 @@ export class GameBrowserComponent implements OnInit {
 
   games: Game[]; // the current list of games showing in the table
 
-  pageSize: number = 10; // how many games to show per page
+  pageSize = 10; // how many games to show per page
   pageNum: number; // what page number we are at
 
-  nextPageEnabled: boolean = true; // whether or not the next page button is clickable
+  nextPageEnabled = true; // whether or not the next page button is clickable
 
   constructor(private api: ApiService, private router: Router, private route: ActivatedRoute) { }
 

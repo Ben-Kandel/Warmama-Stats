@@ -9,7 +9,7 @@
   justify-content: center;
 
   .table-controls {
-    width: 10em;
+    width: 15em;
     display: flex;
     justify-content: space-evenly;
     font-size: 175%;
@@ -34,11 +34,10 @@
 
   .the-table {
     border-collapse: collapse;
-    // text-align: left;
     margin: 0 auto;
     width: 90%;
     max-height: 30em;
-    font-size: 130%;
+    font-size: 150%;
     border: 2px solid $green;
 
     .header {
@@ -61,6 +60,10 @@
 
     .hovered-player td {
       background-color: $green;
+    }
+
+    .hit-fired {
+      color: gray;
     }
 
   }

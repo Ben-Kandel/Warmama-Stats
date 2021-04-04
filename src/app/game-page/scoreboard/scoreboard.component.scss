@@ -45,6 +45,7 @@
 
       .target { // the first row in the table, the header
         border-bottom: 1px solid $gray;
+        height: 3em; // this height should be fixed, or else it looks dumb
       }
 
       .name {
@@ -81,7 +82,7 @@
       align-self: center;
       margin: auto;
       width: 100%;
-      border: 1px solid $gray;
+      border: 2px solid $gray;
       box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
 
       .vs {
@@ -140,7 +141,7 @@
       margin: auto; // center horizontally
       max-height: 100%;
       font-size: 150%;
-      border: 1px solid $gray;
+      border: 2px solid $gray;
       box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
       padding: 0.25em 2em 0.25em 2em;
 

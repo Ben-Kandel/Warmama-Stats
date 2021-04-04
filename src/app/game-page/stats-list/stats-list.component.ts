@@ -12,10 +12,15 @@ export class StatsListComponent implements OnInit {
   @Input() game: FullGame;
   tableMode = 'accuracy';
   WEAPON_NAMES = ['RL', 'LG', 'EB', 'GL', 'MG', 'RG' ,'PG', 'GB'];
+  showHitFired = false;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleHitFired() {
+    this.showHitFired = !this.showHitFired; // flip the boolean
   }
 
   isHighestAccuracy(w: Weapon): boolean {

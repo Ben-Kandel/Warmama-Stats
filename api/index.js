@@ -71,7 +71,7 @@ app.get('/api/games/:game_id', async (req, res) => {
     let [players, _] = await promisePool.query(query);
     // array.push can take multiple arguments, so we can use ...players to unpack each object and give it as an argument
 
-    //get weapon stats for each player
+    //get weapon stats and awards for each player
     for(let i = 0; i < players.length; i++) {
       let playerObj = players[i];
       let player_id = playerObj.id; // get the id for this player
@@ -84,6 +84,13 @@ app.get('/api/games/:game_id', async (req, res) => {
         playerObj.weapons = []; // initialize empty weapons array
         playerObj.weapons.push(...stats[0]); // push the array of weapons on
         gameObj.players.push(playerObj); // add completed player to gameObj
+      }
+
+      // awards
+      query = builder.select('name, count').from('awards').where({'player_id' : player_id}).orderBy('count DESC');
+      let [stats, _] = await promisePool.query(query.toString());
+      if(stats.length != 0) { // if this player actually had any awards
+        playerObj.awards = stats; // attach it to our player object
       }
     }
 
@@ -134,8 +141,6 @@ app.get('/api/games', async (req, res) => {
 
   if(req.query.offset) {
     query = query.offset(req.query.offset);
-  }else {
-    // query = query.offset(0) // default offset of 0
   }
 
   try {
@@ -150,46 +155,25 @@ app.get('/api/games', async (req, res) => {
 
 });
 
-app.get('/api/recentGames/:player_name', async (req, res) => {
-  let name = req.params.player_name;
-  let query = 
-  `SELECT games.* FROM players\
-  JOIN games ON players.game_id = games.id\
-  WHERE players.name LIKE "%${name}%"\
-  ORDER BY date DESC, length DESC\
-  LIMIT 10;`
-  // lets just replace this with a stored procedure, something like getRecentGamesOf(name)
-  let [rows, _] = await promisePool.query(query);
-  console.log(query);
-  res.send(rows);
-});
-
 app.get('/api/playerInfo/:player_name', async (req, res) => {
   // the shape of the data we will be sending back
   let answer = {
-    matchedNames: [],
     recentGames: [],
     pstats: {},
   };
+  // let query = builder.
   let name = req.params.player_name;
-
-  let query = `SELECT DISTINCT name FROM players WHERE name LIKE "%${name}%"`;
-  let [rows, fields] = await promisePool.query(query);
-  // res.send(l.map(x => x.gametype));
-  answer.matchedNames = rows.map(x => x.name);
-  query = `SELECT games.* FROM players\
-  JOIN games ON players.game_id = games.id\
-  WHERE players.name LIKE "%${name}%"\
-  ORDER BY date DESC, length DESC\
-  LIMIT 10`;
-  [rows, fields] = await promisePool.query(query);
+  let query = builder.select('games.id, games.map, games.gametype, games.hostname, games.date, games.length').from('players')
+    .join('games').on({'players.game_id' : 'games.id'}).where({'players.colored_name' : name}).orderBy('date DESC, length DESC')
+    .limit(10);
+  console.log(query.toString());
+  [rows, fields] = await promisePool.query(query.toString());
   answer.recentGames = rows;
-  query = `SELECT sum(p_stats.score) AS total_score, sum(p_stats.frags) AS total_frags, sum(p_stats.deaths) AS total_deaths, \
-  sum(p_stats.dmg_given) AS total_dmg_given, sum(p_stats.dmg_taken) AS total_dmg_taken\
-  FROM players\
-  JOIN p_stats ON players.id = p_stats.player_id\
-  WHERE players.name LIKE "%${name}%"`;
-  [rows, fields]= await promisePool.query(query);
+  query = builder.select('sum(p_stats.score) AS total_score, sum(p_stats.frags) AS total_frags, sum(p_stats.deaths) AS total_deaths, \
+  sum(p_stats.dmg_given) AS total_dmg_given, sum(p_stats.dmg_taken) AS total_dmg_taken').from('players').join('p_stats')
+  .on({'players.id' : 'p_stats.player_id'}).where({'players.colored_name' : name});
+  console.log(query.toString());
+  [rows, fields]= await promisePool.query(query.toString());
   answer.pstats = rows[0];
   res.send(answer);
 });
@@ -206,14 +190,19 @@ app.get('/api/gametypes', async (req, res) => {
 });
 
 app.get('/api/players', async (req, res) => {
-  let query = builder.select('name, count(*) AS game_count').from('players').groupBy('name').orderBy('game_count DESC');
+  let query = builder.select('colored_name, count(*) AS game_count').from('players').groupBy('colored_name').orderBy('game_count DESC');
+  if(req.query.name) {
+    query = query.where(builder.like('players.name', `%${req.query.name}%`));
+  }
   let offset = (req.query.offset) ? req.query.offset : 0;
   let limit = (req.query.limit)? req.query.limit : 10;
   query = query.offset(offset).limit(limit);
   try {
     query = query.toString();
+    console.log('SEARCHING FOR PLAYERS AND GAME COUNTS:');
+    console.log(query);
     let [rows, fields] = await promisePool.query(query);
-    console.log(rows);
+    // console.log(rows);
     res.send(rows);
   }catch(err) {
     console.log(err);

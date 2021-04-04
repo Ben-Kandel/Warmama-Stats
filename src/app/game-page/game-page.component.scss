@@ -1,6 +1,7 @@
 @import '../../variables';
 
 .game-page {
+  width: 95vw;
 
   .header {
     text-align: center;
@@ -44,7 +45,7 @@
   .parent {
     display: flex;
     flex-flow: column nowrap;
-    width: 100em;
+    width: 95vw;
     height: 50em;
 
     .top {
@@ -53,6 +54,11 @@
       justify-content: space-around;
       align-items: center;
       flex: 1;
+      
+
+      @media (max-width: 700px) {
+        flex-flow: column nowrap;
+      }
 
       app-scoreboard {
         width: 100%;
@@ -63,11 +69,10 @@
       }
 
       app-details {
-        width: 100%;
+        width: 50%;
         height: 100%;
-        flex: 1;
-        // border: 1px solid blue;
-        border: 1px solid $green;
+        // flex: 1;
+        border: 2px solid $green;
         box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
         margin-left: 5px;
       }

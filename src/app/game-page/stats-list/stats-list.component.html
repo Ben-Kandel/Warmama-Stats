@@ -2,6 +2,7 @@
   <div class="table-controls">
     <p [class.selected]="tableMode == 'accuracy'" (click)="changeTableMode('accuracy')">Accuracy</p>
     <p [class.selected]="tableMode == 'damage'" (click)="changeTableMode('damage')">Damage</p>
+    <p [class.selected]="showHitFired" (click)="toggleHitFired()">Show More?</p>
   </div>
   <table *ngIf="game.instagib == 0" class="the-table">
     <tr class="header">
@@ -20,8 +21,12 @@
       <td [innerHTML]="player.colored_name | coloredName"></td>
       <td *ngFor="let name of WEAPON_NAMES">
         <div *ngIf="getWeaponByName(player, name) as weap">
-          <p *ngIf="tableMode == 'accuracy'" [class.best]="isHighestAccuracy(weap)">{{weap.shots_hit / weap.shots_fired * 100 | number: '1.0-2'}}%</p>
-          <p *ngIf="tableMode =='damage'" [class.best]="isHighestDamage(weap)">{{weap.damage}}</p>
+          <div>
+            <p *ngIf="tableMode == 'accuracy'" [class.best]="isHighestAccuracy(weap)">{{weap.shots_hit / weap.shots_fired * 100 | number: '1.0-2'}}%</p>
+            <p *ngIf="tableMode =='damage'" [class.best]="isHighestDamage(weap)">{{weap.damage}}</p>
+            <p *ngIf="showHitFired" class="hit-fired">({{weap.shots_hit}}/{{weap.shots_fired}})</p>
+          </div>
+          
         </div>
       </td>
     </tr>

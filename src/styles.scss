@@ -6,7 +6,15 @@ html, body, header, footer, hgroup, nav, article, section, figure,
 figcaption, h1, h2, h3, ul, li, body, div, p, img {
    margin: 0;
    padding: 0;
+   // so we can kind of change the font size to resize the page, definitely need to switch to a better
+   // solution though
    font-size: 100%;
+   @media (max-width: 1300px) {
+     font-size: 95%;
+   }
+   @media (max-width: 1000px) {
+     font-size: 90%;
+   }
    vertical-align: baseline;
    border: 0;
 }
@@ -48,7 +56,7 @@ figcaption, h1, h2, h3, ul, li, body, div, p, img {
 }
 
 .orange {
-  color: rgb(199, 132, 8);
+  color: rgb(255, 153, 0);
 }
 
 .gray {
