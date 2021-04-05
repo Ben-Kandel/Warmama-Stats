@@ -1,12 +1,16 @@
 # Warmama-Stats
 
-### [Website](https://wf-game-stats.web.app)
+### [OLD VERSION](https://wf-game-stats.web.app)
 ### [Warmama](https://github.com/Qfusion/warmama)
 
 Browse thousands of games, filter by specific gametypes, maps, and players, and get an in-depth view into each player's score, damage, accuracy, and more!
 
 
 Everything is currently being re-written, you can look at the upgrade-everything branch to check it out. 
+Alternatively you can navigate to http://192.243.103.112 in your web browser. I haven't set up a proper domain yet, so you'll have to use that IP for now.
+The most finished pages are the player browser and game page. I would recommend **avoiding** the other pages for now :)
+http://192.243.103.112/browser/players
+If you click on any game, you'll be sent to the full game page, for example, http://192.243.103.112/game/3235
 
 
 ## TODO
