@@ -190,7 +190,7 @@ app.get('/api/gametypes', async (req, res) => {
 });
 
 app.get('/api/players', async (req, res) => {
-  let query = builder.select('colored_name, count(*) AS game_count').from('players').groupBy('colored_name').orderBy('game_count DESC');
+  let query = builder.select('name, colored_name, count(*) AS game_count').from('players').groupBy('name, colored_name').orderBy('game_count DESC');
   if(req.query.name) {
     query = query.where(builder.like('players.name', `%${req.query.name}%`));
   }
@@ -208,6 +208,18 @@ app.get('/api/players', async (req, res) => {
     console.log(err);
     res.sendStatus(404);
   }  
+});
+
+app.get('/api/playersInGame/:game_id', async (req, res) => {
+  let game_id = req.params.game_id;
+  let query = builder.select('colored_name').from('players').where({'game_id' : game_id});
+  try {
+    let [rows, fields] = await promisePool.query(query.toString());
+    res.send(rows);
+  }catch(err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
 });
 
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { Game, PlayerPreview, AdvancedPlayerPreview } from '../testing';
+import { Game, PlayerPreview, AdvancedPlayerPreview } from '../interfaces';
 import { FormBuilder } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player-browser',
@@ -30,6 +31,9 @@ export class PlayerBrowserComponent implements OnInit {
     this.route.queryParams.subscribe(queryParams => {
       this.paramsChanged(queryParams);
     });
+    // this.route.queryParams.pipe(take(1)).subscribe(queryParams => {
+    //   this.paramsChanged(queryParams);
+    // });
   }
 
   paramsChanged(params) {
@@ -41,6 +45,7 @@ export class PlayerBrowserComponent implements OnInit {
 
   
   onSubmit(params) {
+    // code copy and pasted from the game-browser page
     // we need to collect only the fields that were filled out
     let queryParams = {};
     for(let x of Object.keys(params)){
@@ -60,7 +65,7 @@ export class PlayerBrowserComponent implements OnInit {
     this.fetchPlayers(test.toString());
   }
 
-  async fetchPlayers(query) {
+  async fetchPlayers(query: string) {
     this.players = [];
     this.players = await this.api.getPlayers(query);
     if(this.players.length < this.pageSize) { // if we received less games than we show per page

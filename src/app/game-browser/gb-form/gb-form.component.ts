@@ -34,6 +34,10 @@ export class GbFormComponent implements OnInit {
     }else {
       this.fetchGametypes();
     }
+    // let map = this.route.snapshot.queryParams.map;
+    // if(map) {
+    //   document.getElementById('map').innerText = map;
+    // }
   }
 
   async fetchGametypes(selectedName='') {

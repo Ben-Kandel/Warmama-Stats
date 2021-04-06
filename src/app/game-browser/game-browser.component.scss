@@ -22,6 +22,28 @@
       flex: 1; // the baseline size
       height: 100%; // we fix the height to be 100%
       border: 1px solid blue;
+      
+      .player-preview {
+        height: 100%;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        font-size: 150%;
+        border: 1px solid green;
+
+        .participants {
+          font-size: 200%;
+        }
+
+      }
+
+      .no-players {
+        text-align: center;
+        margin: auto;
+        font-size: 200%;
+      }
+
     }
 
     #sort-form {

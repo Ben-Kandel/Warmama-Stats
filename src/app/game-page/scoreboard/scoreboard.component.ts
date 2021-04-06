@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FullGame, Player } from 'src/app/testing';
+import { FullGame, Player } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-scoreboard',

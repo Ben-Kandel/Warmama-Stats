@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { FullGame, Player, Weapon } from '../testing';
+import { FullGame, Player, Weapon } from '../interfaces';
 
 @Component({
   selector: 'app-game-page',

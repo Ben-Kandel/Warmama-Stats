@@ -1,8 +1,7 @@
-import { query } from '@angular/animations';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { Game } from '../testing';
+import { Game, PlayerPreview } from '../interfaces';
 
 @Component({
   selector: 'app-game-browser',
@@ -13,6 +12,8 @@ import { Game } from '../testing';
 export class GameBrowserComponent implements OnInit {
 
   games: Game[]; // the current list of games showing in the table
+  hover: Game;
+  players: PlayerPreview[];
 
   pageSize = 10; // how many games to show per page
   pageNum: number; // what page number we are at
@@ -76,12 +77,27 @@ export class GameBrowserComponent implements OnInit {
 
   async fetchGames(query) {
     // console.log(query);
+    this.nextPageEnabled = true; // reset this
     console.log(`asked to fetch games, page size of ${this.pageSize}`);
     this.games = []; // clear the list to show we are loading
     this.games = await this.api.getGameList(query);
     if(this.games.length < this.pageSize) { // if we received less games than we show per page
       this.nextPageEnabled = false;
     }
+  }
+
+  navigateToGame(game: Game) {
+    this.router.navigate([`/game/${game.id}`]);
+  }
+
+  gameHovered(game: Game) {
+    // this is where we fetch the list of players so we can show it in the hover preview
+    this.hover = game;
+    this.fetchPlayersForPreview(game.id);
+  }
+
+  async fetchPlayersForPreview(game_id: number) {
+    this.players = await this.api.getPlayersInGame(game_id);
   }
 
 }

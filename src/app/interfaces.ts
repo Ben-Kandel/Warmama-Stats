@@ -63,6 +63,7 @@ export interface Award {
 }
 
 export interface PlayerPreview {
+  name: string;
   colored_name: string;
   gameCount: number;
 }

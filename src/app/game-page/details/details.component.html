@@ -12,7 +12,7 @@
         <p class="title">Frags</p>
         <p>Frags: {{hover.frags}}</p>
         <p>Deaths: {{hover.deaths}}</p>
-        <p *ngIf="getKDRatio(hover) as num">Ratio: <span [class.green]="num == 1" [class.green]="num > 1" [class.red]="num < 1">{{num | number: '1.2-2'}}</span></p>
+        <p *ngIf="getKDRatio(hover) as num">Ratio: <span [class.green]="num == 1" [class.green]="num > 1" [class.red]="num < 1">{{num | number: '1.0-2'}}</span></p>
       </div>
     </div>
     <div class="awards">

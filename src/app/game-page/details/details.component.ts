@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FullGame, Player, Weapon } from 'src/app/testing';
+import { FullGame, Player, Weapon } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-details',
