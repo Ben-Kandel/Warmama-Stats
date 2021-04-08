@@ -8,9 +8,10 @@
 
   .nav-bar {
     width: 30em;
-    height: 2.5em;
-    border: 1px solid $green;
+    height: 2.75em;
+    border: 2px solid $green;
     padding: 2px;
+    overflow: hidden;
 
     a {
       color: $gray;
@@ -34,6 +35,7 @@
       text-align: center;
       padding: 10px;
       text-decoration: none;
+      border: 1px solid transparent;
     }
 
     li a:hover {

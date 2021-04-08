@@ -16,13 +16,10 @@
   <div class="player-selector">
     <h2>Player</h2>
     <input formControlName="player" type="text" placeholder="enter player name">
-    <mat-radio-group>
-      <mat-radio-button value="exact">Exact Match</mat-radio-button>
-      <mat-radio-button value="fuzzy">Fuzzy Match</mat-radio-button>
-    </mat-radio-group>
   </div>
-  <!-- <div class="form-stuff">
-    <label>Map: </label>
-    <input formControlName="map" type="text" placeholder="enter map">
-  </div> -->
+  <div class="form-control">
+    <h2>Controls</h2>
+    <input type="button" (click)="onSubmit()" value="Submit">
+    <input type="button" (click)="clear()" value="Clear">
+  </div>
 </form>

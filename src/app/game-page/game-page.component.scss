@@ -66,15 +66,22 @@
         flex: 1;
         margin-right: 5px;
         // border: 1px solid red;
+
+        @media (max-width: 700px) {
+          margin: 0 0 1em 0;
+        }
       }
 
       app-details {
         width: 50%;
         height: 100%;
-        // flex: 1;
         border: 2px solid $green;
         box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
         margin-left: 5px;
+
+        @media (max-width: 700px) {
+          width: 80%;
+        }
       }
 
     }

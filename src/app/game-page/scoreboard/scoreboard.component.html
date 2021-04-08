@@ -35,8 +35,8 @@
   <div *ngIf="game.teamgame == 1" class="team-game">
     <table *ngFor="let item of [].constructor(2); let i = index" class="team" [class.forbidden-table]="i == 0" [class.icy-table]="i == 1">
       <caption [class.forbidden]="i == 0" [class.icy]="i == 1">
-        <div *ngIf="i == 0; else elseBlock">FORBIDDEN {{game.teams.t1_score}}</div>
-        <ng-template #elseBlock>ICY {{game.teams.t2_score}}</ng-template>
+        <div *ngIf="i == 0">FORBIDDEN <span *ngIf="game.teams">{{game.teams.t1_score}}</span></div>
+        <div *ngIf="i == 1">ICY <span *ngIf="game.teams">{{game.teams.t2_score}}</span></div>
       </caption>
       <tr class="target">
         <th class="name too-close">Name</th>

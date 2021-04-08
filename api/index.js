@@ -124,8 +124,8 @@ app.get('/api/games', async (req, res) => {
 
   let query = builder.select('games.id, games.map, games.gametype, games.hostname, games.date, games.length').from('games');
 
-  if(req.query.player_name) {
-    query = query.join('players').on({'games.id' : 'players.game_id'}).where(builder.like('players.name', `%${req.query.player_name}%`));
+  if(req.query.player) {
+    query = query.join('players').on({'games.id' : 'players.game_id'}).where(builder.like('players.name', `%${req.query.player}%`));
   }
 
   if(req.query.gametype) {

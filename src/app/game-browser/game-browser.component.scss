@@ -12,30 +12,47 @@
 
   #top-box {
     width: 100%;
-    height: 15em;
+    height: 50%;
+    margin-bottom: 3em;
+    border: 1px solid $gray;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
     
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 
+    @media (max-width: 1080px) {
+      flex-flow: column nowrap;
+    }
+
     #hover-preview {
       flex: 1; // the baseline size
       height: 100%; // we fix the height to be 100%
-      border: 1px solid blue;
+      border-left: 1px solid $gray;
+
+      @media (max-width: 1080px) {
+        border: none;
+      }
       
       .player-preview {
         height: 100%;
+        width: 100%;
         display: flex;
         flex-flow: column wrap;
         align-items: center;
         justify-content: center;
-        font-size: 150%;
-        border: 1px solid green;
+        font-size: 130%;
+        overflow: hidden;
 
-        .participants {
-          font-size: 200%;
+        @media (max-width: 1080px) {
+          border: none;
+          flex-flow: row wrap;
+          font-size: 150%;
+          
+          p {
+            margin: 0 .25em 0 .25em;
+          }
         }
-
       }
 
       .no-players {
@@ -49,10 +66,14 @@
     #sort-form {
       flex: 2; // this box is twice the length size of the baseline
       height: 100%; // we fix the height to be 100%
-      border: 1px solid red;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      app-gb-form {
+        width: 100%;
+        height: 100%;
+      }
     }
 
   }
@@ -68,12 +89,13 @@
     #game-list {
       width: 100%;
       flex: 4;
+      font-size: 115%;
 
       table {
         height: 100%;
         width: 100%;
         border-collapse: collapse;
-        border: 1px solid black;
+        border: 2px solid $green;
         text-align: left;
     
         tr:nth-child(even)  td {

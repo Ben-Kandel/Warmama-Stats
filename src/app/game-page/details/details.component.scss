@@ -9,8 +9,8 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    // height: 100%;
-    // border: 1px solid red;  
+    height: 100%;
+    width: 100%;
     align-self: center;
     margin: auto;
 
@@ -37,24 +37,27 @@
 
     }
 
-    .awards {
-      text-align: center;
-      font-size: 150%;
-    }
-
     .gametype-stats {
       flex: 1;
+      width: 100%;
+
+      .awards {
+        text-align: center;
+        font-size: 150%;
+        display: flex;
+        flex-flow: column wrap;
+      }
 
       .duel-stats {
 
         .wrapper {
           display: flex;
-          flex-flow: column nowrap;
+          flex-flow: row nowrap;
 
           .item {
             display: flex;
             flex-flow: column nowrap;
-            width: 16.2em;;
+            width: 50%;
             text-align: center;
             font-size: 150%;
 
@@ -69,7 +72,15 @@
             .armor {
               display: flex;
               flex-flow: row wrap;
+              justify-content: center;
             }
+
+            .health {
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+            }
+            
           }
         }
 
@@ -190,4 +201,11 @@
     }
   }
 
+}
+
+@media (max-width: 700px) {
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }

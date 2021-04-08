@@ -5,12 +5,11 @@
       <app-gb-form (searchClicked)="onSubmit($event)"></app-gb-form>
     </div>
     <div id="hover-preview">
-      <div *ngIf="hover && players.length != 0; else elseBlock" class="player-preview">
-        <p class="participants">Participants:</p>
+      <div *ngIf="hover && players; else elseBlock" class="player-preview">
         <p *ngFor="let player of players" [innerHTML]="player.colored_name | coloredName"></p>
       </div>
       <ng-template #elseBlock>
-        <p class="no-players">Hover over a game view the participants.</p>
+        <p class="no-players">Hover over a game to view the participants.</p>
       </ng-template>
     </div>
   </div>

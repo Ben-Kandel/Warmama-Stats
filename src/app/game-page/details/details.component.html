@@ -15,9 +15,6 @@
         <p *ngIf="getKDRatio(hover) as num">Ratio: <span [class.green]="num == 1" [class.green]="num > 1" [class.red]="num < 1">{{num | number: '1.0-2'}}</span></p>
       </div>
     </div>
-    <div class="awards">
-      <p *ngFor="let award of hover.awards"><span [innerHTML]="award.name | coloredName"></span> x {{award.count}}</p>
-    </div>
     <div [ngSwitch]="parseGametype()" class="gametype-stats">
       <div *ngSwitchCase="'duel'" class="duel-stats">
         <p class="title">Duel Pickups</p>
@@ -37,6 +34,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div *ngSwitchDefault class="awards">
+        <p *ngFor="let award of hover.awards"><span [innerHTML]="award.name | coloredName"></span> x {{award.count}}</p>
       </div>
     </div>
   </div>

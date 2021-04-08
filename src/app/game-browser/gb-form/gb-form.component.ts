@@ -34,10 +34,14 @@ export class GbFormComponent implements OnInit {
     }else {
       this.fetchGametypes();
     }
-    // let map = this.route.snapshot.queryParams.map;
-    // if(map) {
-    //   document.getElementById('map').innerText = map;
-    // }
+    let map = this.route.snapshot.queryParams.map;
+    if(map) {
+      this.searchForm.controls['map'].setValue(map);
+    }
+    let player = this.route.snapshot.queryParams.player;
+    if(player) {
+      this.searchForm.controls['player'].setValue(player);
+    }
   }
 
   async fetchGametypes(selectedName='') {
@@ -63,6 +67,12 @@ export class GbFormComponent implements OnInit {
     let gametype = this.getSelectedGametype();
     x.gametype = gametype;
     this.searchClicked.emit(x);
+  }
+
+  clear() {
+    this.searchForm.reset(); // reset the form
+    this.gametypes.forEach(c => c.selected = false); // reset the chip list
+    this.searchClicked.emit(this.searchForm.value);
   }
   
   getSelectedGametype(): string {

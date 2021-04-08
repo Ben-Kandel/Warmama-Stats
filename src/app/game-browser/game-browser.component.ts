@@ -30,7 +30,6 @@ export class GameBrowserComponent implements OnInit {
   }
 
   paramsChanged(params) {
-    console.log(params);
     let offset = (params.offset) ? parseInt(params.offset) : 0;
     let num = Math.floor(offset / this.pageSize) + 1;
     this.pageNum = num; 
@@ -53,15 +52,12 @@ export class GameBrowserComponent implements OnInit {
         test.append(x, params[x]);
       }
     }
-
-    console.log(`query params in string form: ${test.toString()}`);
     this.router.navigate(['/browser/games'], { queryParams: queryParams});
     this.fetchGames(test.toString());
   }
 
   prevPage() {
     let currentOffset = (this.pageNum - 1) * this.pageSize;
-    // console.log('current offset: ' + currentOffset);
     if(currentOffset != 0) {
       this.router.navigate(['/browser/games'], { queryParams : { offset: currentOffset - this.pageSize}, queryParamsHandling : 'merge'});
       this.nextPageEnabled = true;
@@ -76,10 +72,8 @@ export class GameBrowserComponent implements OnInit {
   }
 
   async fetchGames(query) {
-    // console.log(query);
     this.nextPageEnabled = true; // reset this
-    console.log(`asked to fetch games, page size of ${this.pageSize}`);
-    this.games = []; // clear the list to show we are loading
+    // this.games = []; // clear the list to show we are loading
     this.games = await this.api.getGameList(query);
     if(this.games.length < this.pageSize) { // if we received less games than we show per page
       this.nextPageEnabled = false;
@@ -93,7 +87,9 @@ export class GameBrowserComponent implements OnInit {
   gameHovered(game: Game) {
     // this is where we fetch the list of players so we can show it in the hover preview
     this.hover = game;
-    this.fetchPlayersForPreview(game.id);
+    if(game) {
+      this.fetchPlayersForPreview(game.id);
+    }
   }
 
   async fetchPlayersForPreview(game_id: number) {

@@ -9,6 +9,10 @@
   flex-flow: row nowrap;
   align-items: center;
 
+  & > div {
+    margin: 0.25em;
+  }
+
   @media (max-width: 800px) {
     flex-flow: column nowrap;
   }
@@ -16,14 +20,14 @@
   .player-list {
     flex: 1; // takes care of width
     height: 100%;
-    border: 1px solid red;
+    border: 2px solid $gray;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
 
     @media (max-width: 800px) {
       width: 100%;
-      border: none;
     }
 
     .item {
@@ -68,14 +72,15 @@
   .player-details {
     flex: 3; // takes care of width
     height: 100%;
-    border: 1px solid blue;
+    border: 2px solid $green;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
 
     @media (max-width: 800px) {
       width: 100%;
-      border: none;
+      height: 100%;
     }
 
     .header {

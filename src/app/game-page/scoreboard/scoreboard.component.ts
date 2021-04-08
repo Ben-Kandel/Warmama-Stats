@@ -14,7 +14,9 @@ export class ScoreboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+    if(!this.game.teams) {
+      console.log('Team scores not available for this game...continuing.');
+    }
   }
 
   gametypeLike(compare: string) {
@@ -33,7 +35,6 @@ export class ScoreboardComponent implements OnInit {
 
   sortPlayersByScore(p: Player[]): Player[] {
     //sort by score, and then by name (i think this is how the scoreboard works in-game)
-    // return p.sort((a, b) => (a.score < b.score) ? 1 : -1);
     return p.sort((a, b) => (a.score < b.score) ? 1 : (a.score === b.score) ? ((a.colored_name < b.colored_name) ? 1 : -1) : -1);
   }
 
