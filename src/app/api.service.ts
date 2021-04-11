@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AdvancedPlayerPreview, Game, PlayerPreview, FullGame, Player, Weapon } from './interfaces';
+import { AdvancedPlayerPreview, Game, PlayerPreview, FullGame, Player, Weapon, FullPlayer } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 
 let DEBUG: boolean = true;
@@ -134,6 +134,25 @@ export class ApiService {
       console.log(err);
     }
 
+  }
+
+  async getFullPlayer(coloredPlayerName: string, gametype?: string): Promise<FullPlayer> {
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/players/${coloredPlayerName}`;
+      
+    }else {
+      url = `/api/players/${coloredPlayerName}`;
+    }
+    if(gametype) {
+      url += `?gametype=${gametype}`;
+    }
+    try {
+      let x = await this.http.get<FullPlayer>(url).toPromise();
+      return x;
+    } catch(err) {
+      console.log(err);
+    }
   }
 
 }

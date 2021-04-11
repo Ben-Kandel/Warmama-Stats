@@ -46,14 +46,15 @@
     display: flex;
     flex-flow: column nowrap;
     width: 95vw;
-    height: 50em;
+    height: 55em;
 
     .top {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-around;
       align-items: center;
-      flex: 1;
+      flex: 1.25;
+      // border: 2px solid red;
       
 
       @media (max-width: 700px) {
@@ -89,8 +90,8 @@
     .bottom {
       text-align: center;
       flex: 1;
-      // border: 1px solid red;
       margin-top: 2em;
+
     }
   }
   

@@ -1,0 +1,46 @@
+<div *ngIf="playerData && playerData2; else elseBlock" id="player-page">
+  <div class="top">
+    <h2 [innerHTML]="playerColoredName | coloredName"></h2>
+    <div class="player-info">
+      <div class="left item">
+        <p>Score: <span class="white">{{playerData2.pstats.total_score | number}}</span></p>
+        <p *ngIf="playerData2.pstats.total_dmg_given / playerData2.pstats.total_dmg_taken as dmgr">
+          Damage Ratio: 
+          <span [class.green]="dmgr >= 1" [class.red]="dmgr < 1">{{dmgr | number}}</span>
+          -
+          <span class="smaller">({{playerData2.pstats.total_dmg_given | number}}/{{playerData2.pstats.total_dmg_taken | number}})</span>
+        </p>
+        <p *ngIf="playerData2.pstats.total_frags / playerData2.pstats.total_deaths as kdr">
+          Kill Ratio: 
+          <span [class.green]="kdr >= 1" [class.red]="kdr < 1">{{kdr | number: '1.0-2'}}</span>
+          -
+          <span class="smaller">({{playerData2.pstats.total_frags | number}}/{{playerData2.pstats.total_deaths | number}})</span>
+        </p>
+      </div>
+      <div class="right item">
+        <p>Total Games Played: {{playerData.game_count}}</p>
+        <p>Favorite Map: {{playerData.favorite_map}}</p>
+        <p>Most Recent Game: {{playerData2.recent_games[0].date}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="gametype-selector">
+      <div class="gt" *ngFor="let gametype of playerData.gametypes" 
+      [class.selected]="gametype.name == selectedGametype"
+      (click)="selectGametype(gametype)">
+        <p class="name">{{gametype.name}}</p>
+        <p class="count">({{gametype.count}})</p>
+      </div>
+    </div>
+    <canvas baseChart width="1000" height="400"
+    [datasets]="lineChartData"
+    [chartType]="'line'"
+    [options]="lineChartOptions"
+    >
+  </canvas>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <p>Loading...</p>
+</ng-template>

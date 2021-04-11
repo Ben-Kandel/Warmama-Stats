@@ -45,7 +45,7 @@
         <th>Map</th>
         <th>Date</th>
       </tr>
-      <tr *ngFor="let game of selectedPlayerInfo.recentGames"
+      <tr *ngFor="let game of selectedPlayerInfo.recent_games"
       (click)="navigateToGame(game)">
         <td [innerHTML]="game.hostname | coloredName"></td>
         <td>{{game.gametype}}</td>
@@ -55,6 +55,7 @@
       </tr>
     </table>
     <p>Click on a game to view the full game page.</p>
+    <p><a [href]="'player/' + selectedPlayer.colored_name">Link to player page</a></p>
   </div>
   <ng-template #elseBlock>
     <div class="player-details">

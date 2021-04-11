@@ -20,6 +20,8 @@ import { GamePageComponent } from './game-page/game-page.component';
 import { ScoreboardComponent } from './game-page/scoreboard/scoreboard.component';
 import { DetailsComponent } from './game-page/details/details.component';
 import { StatsListComponent } from './game-page/stats-list/stats-list.component';
+import { PlayerPageComponent } from './player-page/player-page.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { StatsListComponent } from './game-page/stats-list/stats-list.component'
     ScoreboardComponent,
     DetailsComponent,
     StatsListComponent,
+    PlayerPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { StatsListComponent } from './game-page/stats-list/stats-list.component'
     MatChipsModule,
     MatRadioModule,
     MatMenuModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

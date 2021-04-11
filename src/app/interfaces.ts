@@ -65,11 +65,11 @@ export interface Award {
 export interface PlayerPreview {
   name: string;
   colored_name: string;
-  gameCount: number;
+  game_count: number;
 }
 
 export interface AdvancedPlayerPreview {
-  recentGames: Game[];
+  recent_games: Game[];
   pstats: {
     total_score: number;
     total_frags: number;
@@ -77,4 +77,23 @@ export interface AdvancedPlayerPreview {
     total_dmg_given: number;
     total_dmg_taken: number;
   }
+}
+
+
+export interface TestGame {
+  game_id: number;
+  weapon_stats: Weapon[];
+}
+
+
+export interface Gametype {
+  name: string;
+  count: number;
+}
+
+export interface FullPlayer {
+  games: TestGame[];
+  game_count: number;
+  favorite_map: string;
+  gametypes: Gametype[];
 }

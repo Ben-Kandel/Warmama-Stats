@@ -31,9 +31,6 @@ export class PlayerBrowserComponent implements OnInit {
     this.route.queryParams.subscribe(queryParams => {
       this.paramsChanged(queryParams);
     });
-    // this.route.queryParams.pipe(take(1)).subscribe(queryParams => {
-    //   this.paramsChanged(queryParams);
-    // });
   }
 
   paramsChanged(params) {
@@ -80,10 +77,6 @@ export class PlayerBrowserComponent implements OnInit {
   playerClicked(p: PlayerPreview) {
     this.selectedPlayer = p;
     this.fetchRecentGames(p.colored_name);
-  }
-
-  navigateToPlayerPage() {
-    this.router.navigate(['/player/test']);
   }
 
   prevPage() {

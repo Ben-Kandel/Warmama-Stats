@@ -3,6 +3,7 @@ const builder = require('mysql-bricks');
 const helmet = require('helmet');
 const cors = require('cors');
 const express = require('express');
+const { promise } = require('selenium-webdriver');
 let app = express();
 app.use(helmet());
 app.use(cors());
@@ -23,17 +24,6 @@ const pool = mysql.createPool({
 });
 
 const promisePool = pool.promise();
-
-// takes the text, and inserts the values to make an sql query
-// returns a string
-function convertQuery(text, values) {  
-  // let answer = text;
-  for(let i = 1; i < values.length+1; i++) {
-    let search = '$' + i;  
-    text = text.replace(search, values[i-1]);
-  }
-  return text;
-}
 
 app.get('/', async (req, res) => {
   res.send('hey');
@@ -158,17 +148,17 @@ app.get('/api/games', async (req, res) => {
 app.get('/api/playerInfo/:player_name', async (req, res) => {
   // the shape of the data we will be sending back
   let answer = {
-    recentGames: [],
+    recent_games: [],
     pstats: {},
   };
   // let query = builder.
   let name = req.params.player_name;
   let query = builder.select('games.id, games.map, games.gametype, games.hostname, games.date, games.length').from('players')
-    .join('games').on({'players.game_id' : 'games.id'}).where({'players.colored_name' : name}).orderBy('date DESC, length DESC')
+    .join('games').on({'players.game_id' : 'games.id'}).where({'players.colored_name' : name}).orderBy('date DESC, games.id DESC')
     .limit(10);
   console.log(query.toString());
   [rows, fields] = await promisePool.query(query.toString());
-  answer.recentGames = rows;
+  answer.recent_games = rows;
   query = builder.select('sum(p_stats.score) AS total_score, sum(p_stats.frags) AS total_frags, sum(p_stats.deaths) AS total_deaths, \
   sum(p_stats.dmg_given) AS total_dmg_given, sum(p_stats.dmg_taken) AS total_dmg_taken').from('players').join('p_stats')
   .on({'players.id' : 'p_stats.player_id'}).where({'players.colored_name' : name});
@@ -220,6 +210,77 @@ app.get('/api/playersInGame/:game_id', async (req, res) => {
     console.log(err);
     res.sendStatus(404);
   }
+});
+
+app.get('/api/players/:playerName', async (req, res) => {
+  let query = builder.select('games.id AS game_id, players.id AS player_id').from('games')
+    .join('players').on({'games.id' : 'players.game_id'}).where({'players.colored_name' : req.params.playerName})
+    .orderBy('games.date DESC, game_id DESC');
+  if(req.query.gametype) {
+    query = query.where({'games.gametype' : req.query.gametype});
+  }
+  query = (req.query.limit) ? query.limit(req.query.limit) : query.limit(200); // default limit of 100
+  let answer = {
+    games: [],
+    game_count: -1,
+    favorite_map: '',
+    gametypes: [],
+  }
+  try {
+    query = query.toString();
+    console.log(query);
+    let [rows, _] = await promisePool.query(query);
+    for(let i = 0; i < rows.length; i++) {
+      let row = rows[i];
+      let player_id = row.player_id;
+      let gametype = row.gametype;
+      let map = row.map;
+      let [weaponStats, _] = await promisePool.query(`CALL getWeaponStats(${player_id})`);
+      answer.games.push({game_id: row.game_id, gametype: gametype, map: map, weapon_stats: weaponStats[0]});
+    }
+  }catch(err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
+  query = builder.select('count(*) AS game_count').from('games').join('players').on({'games.id' : 'players.game_id'})
+  .where({'players.colored_name' : req.params.playerName})
+  query = query.toString();
+  console.log(query);
+  try {
+    let [rows, _] = await promisePool.query(query);
+    if(rows.length >= 1) {
+      answer.game_count = rows[0].game_count;
+    }
+  }catch(err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
+  query = builder.select('map, count(*) AS game_count').from('games').join('players').on({'games.id' : 'players.game_id'})
+  .where({'players.colored_name' : req.params.playerName}).groupBy('map').orderBy('game_count DESC, map').limit(1);
+  query = query.toString();
+  console.log(query);
+  try {
+    let [rows, _] = await promisePool.query(query);
+    if(rows.length >= 1) {
+      answer.favorite_map = rows[0].map;
+    }
+  }catch(err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
+  query = builder.select('gametype AS name, count(*) AS count').from('games').join('players').on({'games.id' : 'players.game_id'})
+    .where({'players.colored_name' : req.params.playerName}).groupBy('gametype').orderBy('count DESC');
+  query = query.toString();
+  console.log(query);
+  try {
+    let [rows, _] = await promisePool.query(query);
+    answer.gametypes = rows;
+  }catch(err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
+  res.send(answer);
+  
 });
 
 
