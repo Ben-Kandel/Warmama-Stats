@@ -1,8 +1,53 @@
+@import '../../variables';
+
 #about {
   text-align: center;
-  font-size: 150%;
+  font-size: 180%;
+  margin-top: 0.5em;
+  width: 100vw;
 
   h1 {
-    font-size: 175%;
+    font-size: 180%;
+  }
+
+  .container {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 75%;
+    margin: auto;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+
+    h2 {
+      font-size: 150%;
+    }
+
+    p {
+      font-size: 80%;
+    }
+
+    ol { padding: 0;}
+    
+    .left, .right {
+      width: 100%;
+      min-height: 30em;
+      border: 2px solid $orange;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      list-style-position: inside;
+      align-self: flex-start;
+      p {
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      flex-flow: column nowrap;
+      .left, .right {
+        min-height: auto;
+      }
+    }
   }
 }

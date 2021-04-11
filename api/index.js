@@ -3,7 +3,6 @@ const builder = require('mysql-bricks');
 const helmet = require('helmet');
 const cors = require('cors');
 const express = require('express');
-const { promise } = require('selenium-webdriver');
 let app = express();
 app.use(helmet());
 app.use(cors());
@@ -180,7 +179,7 @@ app.get('/api/gametypes', async (req, res) => {
 });
 
 app.get('/api/players', async (req, res) => {
-  let query = builder.select('name, colored_name, count(*) AS game_count').from('players').groupBy('name, colored_name').orderBy('game_count DESC');
+  let query = builder.select('name, colored_name, count(*) AS game_count').from('players').groupBy('name, colored_name').orderBy('game_count DESC, colored_name');
   if(req.query.name) {
     query = query.where(builder.like('players.name', `%${req.query.name}%`));
   }
@@ -213,36 +212,12 @@ app.get('/api/playersInGame/:game_id', async (req, res) => {
 });
 
 app.get('/api/players/:playerName', async (req, res) => {
-  let query = builder.select('games.id AS game_id, players.id AS player_id').from('games')
-    .join('players').on({'games.id' : 'players.game_id'}).where({'players.colored_name' : req.params.playerName})
-    .orderBy('games.date DESC, game_id DESC');
-  if(req.query.gametype) {
-    query = query.where({'games.gametype' : req.query.gametype});
-  }
-  query = (req.query.limit) ? query.limit(req.query.limit) : query.limit(200); // default limit of 100
   let answer = {
-    games: [],
     game_count: -1,
     favorite_map: '',
     gametypes: [],
   }
-  try {
-    query = query.toString();
-    console.log(query);
-    let [rows, _] = await promisePool.query(query);
-    for(let i = 0; i < rows.length; i++) {
-      let row = rows[i];
-      let player_id = row.player_id;
-      let gametype = row.gametype;
-      let map = row.map;
-      let [weaponStats, _] = await promisePool.query(`CALL getWeaponStats(${player_id})`);
-      answer.games.push({game_id: row.game_id, gametype: gametype, map: map, weapon_stats: weaponStats[0]});
-    }
-  }catch(err) {
-    console.log(err);
-    res.sendStatus(404);
-  }
-  query = builder.select('count(*) AS game_count').from('games').join('players').on({'games.id' : 'players.game_id'})
+  let query = builder.select('count(*) AS game_count').from('games').join('players').on({'games.id' : 'players.game_id'})
   .where({'players.colored_name' : req.params.playerName})
   query = query.toString();
   console.log(query);
@@ -280,7 +255,33 @@ app.get('/api/players/:playerName', async (req, res) => {
     res.sendStatus(404);
   }
   res.send(answer);
-  
+});
+
+app.get('/api/weaponStats/:playerName', async (req, res) => {
+  let query = builder.select('games.id AS game_id, players.id AS player_id').from('games')
+    .join('players').on({'games.id' : 'players.game_id'}).where({'players.colored_name' : req.params.playerName})
+    .orderBy('games.date DESC, game_id DESC');
+  if(req.query.gametype) {
+    query = query.where({'games.gametype' : req.query.gametype});
+  }
+  query = (req.query.limit) ? query.limit(req.query.limit) : query.limit(200); // default limit of 100
+  let answer = {
+    weapon_stats: [],
+  }
+  try {
+    query = query.toString();
+    let [rows, _] = await promisePool.query(query);
+    for(let i = 0; i < rows.length; i++) {
+      let row = rows[i];
+      let player_id = row.player_id;
+      let [weaponStats, _] = await promisePool.query(`CALL getWeaponStats(${player_id})`);
+      answer.weapon_stats.push({game_id: row.game_id, weapons: weaponStats[0]});
+    }
+  }catch(err) {
+    console.log(err);
+    res.sendStatus(404);
+  }
+  res.send(answer);
 });
 
 

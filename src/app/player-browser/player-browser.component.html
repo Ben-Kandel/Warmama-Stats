@@ -55,7 +55,7 @@
       </tr>
     </table>
     <p>Click on a game to view the full game page.</p>
-    <p><a [href]="'player/' + selectedPlayer.colored_name">Link to player page</a></p>
+    <p class="page-link" (click)="navigateToPlayerPage()">Click for full player page.</p>
   </div>
   <ng-template #elseBlock>
     <div class="player-details">

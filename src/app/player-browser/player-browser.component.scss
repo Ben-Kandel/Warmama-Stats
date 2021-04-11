@@ -77,9 +77,15 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-
-    a {
-      color: $gray;
+    
+    .page-link {
+      padding: 5px;
+      border: 1px solid $gray;
+      margin-top: 0.25em;
+      &:hover {
+        background-color: $lighter-blue;
+        border: 1px solid $orange;
+      }
     }
 
     @media (max-width: 800px) {

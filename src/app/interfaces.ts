@@ -79,21 +79,27 @@ export interface AdvancedPlayerPreview {
   }
 }
 
-
-export interface TestGame {
-  game_id: number;
-  weapon_stats: Weapon[];
-}
-
-
 export interface Gametype {
   name: string;
   count: number;
 }
 
 export interface FullPlayer {
-  games: TestGame[];
   game_count: number;
   favorite_map: string;
   gametypes: Gametype[];
 }
+
+export interface WeaponStats {
+  game_id: number;
+  weapons: Weapon[];
+}
+
+export interface Stats {
+  weapon_stats: WeaponStats[];
+}
+
+
+
+
+

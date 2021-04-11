@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AdvancedPlayerPreview, Game, PlayerPreview, FullGame, Player, Weapon, FullPlayer } from './interfaces';
+import { AdvancedPlayerPreview, Game, PlayerPreview, FullGame, Player, Weapon, FullPlayer, Stats } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 
 let DEBUG: boolean = true;
@@ -151,6 +151,25 @@ export class ApiService {
       let x = await this.http.get<FullPlayer>(url).toPromise();
       return x;
     } catch(err) {
+      console.log(err);
+    }
+  }
+
+  async getWeaponStats(coloredPlayerName: string, gametype?: string): Promise<Stats> {
+    let url: string;
+    if(DEBUG) {
+      url = `${testURL}/api/weaponStats/${coloredPlayerName}`;
+      
+    }else {
+      url = `/api/weaponStats/${coloredPlayerName}`;
+    }
+    if(gametype) {
+      url += `?gametype=${gametype}`;
+    }
+    try {
+      let x = await this.http.get<Stats>(url).toPromise();
+      return x;
+    }catch(err) {
       console.log(err);
     }
   }

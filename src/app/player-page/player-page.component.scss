@@ -2,13 +2,15 @@
 
 #player-page {
   width: 95vw;
-  height: 60em;
+  height: 80em;
+  // height: min(100em, 95vh);
   margin-top: 1em;
   display: flex;
   flex-flow: column nowrap;
 
   .top {
-    border: 1px solid red;
+    border: 2px solid $gray;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
     flex: 1; // takes care of height
     display: flex;
     flex-flow: column nowrap;
@@ -16,7 +18,7 @@
     justify-content: flex-start;
     
     h2 {
-      font-size: 220%;
+      font-size: 280%;
     }
 
     .player-info {
@@ -45,7 +47,9 @@
   }
 
   .bottom {
-    border: 1px solid blue;
+    border: 2px solid $green;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 2em;
     flex: 2; // takes care of height. this container is twice as tall as the top one
     display: flex;
     flex-flow: column nowrap;
@@ -86,6 +90,13 @@
         background-color: $lighter-blue;
       }
 
+    }
+
+
+    .chart-container {
+      border: 1px solid $orange;
+      margin-top: 2em;
+      width: 80%;
     }
   }
 }

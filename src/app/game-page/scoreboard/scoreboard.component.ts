@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { FullGame, Player } from 'src/app/interfaces';
 
 @Component({
@@ -11,7 +12,7 @@ export class ScoreboardComponent implements OnInit {
   @Input() game: FullGame;
   @Output() playerHovered = new EventEmitter<Player>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if(!this.game.teams) {
@@ -44,6 +45,11 @@ export class ScoreboardComponent implements OnInit {
 
   offHover() {
     this.playerHovered.emit();
+  }
+
+  navigateToPlayerPage(p: Player) {
+    console.log('yep');
+    this.router.navigate(['/player/' + p.colored_name]);
   }
 
 }

@@ -31,6 +31,10 @@ export class PlayerBrowserComponent implements OnInit {
     this.route.queryParams.subscribe(queryParams => {
       this.paramsChanged(queryParams);
     });
+    let name = this.route.snapshot.queryParams.name;
+    if(name) {
+      this.searchForm.controls['player'].setValue(name);
+    }
   }
 
   paramsChanged(params) {
@@ -110,6 +114,10 @@ export class PlayerBrowserComponent implements OnInit {
       this.nextPageEnabled = true;
     }
     this.onSubmit({name: playerName});
+  }
+
+  navigateToPlayerPage() {
+    this.router.navigate(['/player/' + this.selectedPlayer.colored_name]);
   }
 
 

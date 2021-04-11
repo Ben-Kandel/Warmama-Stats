@@ -33,12 +33,16 @@
         <p class="count">({{gametype.count}})</p>
       </div>
     </div>
-    <canvas baseChart width="1000" height="400"
-    [datasets]="lineChartData"
-    [chartType]="'line'"
-    [options]="lineChartOptions"
-    >
-  </canvas>
+    <div *ngIf="weaponData" class="chart-container">
+      <canvas id="chart" baseChart
+      [datasets]="lineChartData"
+      [chartType]="'line'"
+      [options]="lineChartOptions"
+      >
+    </canvas>
+    </div>
+    <div class="recent-games">
+    </div>
   </div>
 </div>
 <ng-template #elseBlock>

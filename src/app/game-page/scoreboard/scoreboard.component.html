@@ -3,14 +3,14 @@
     <!-- if it's not a team game, then it's either a duel game or some type of ffa, and I want to show different things for these cases -->
     <div *ngIf="gametypeLike('duel'); else notDuel" class="duel">
       <div class="player box" *ngIf="sortPlayersByScore(game.players)[0] as player"
-      (mouseover)="onHover(player)" (mouseout)="offHover()">
+      (mouseover)="onHover(player)" (mouseout)="offHover()" (click)="navigateToPlayerPage(player)">
         <p class="name" [innerHTML]="player.colored_name | coloredName"></p>
         <p class="score">Score: {{player.score}}</p>
         <p class="kd">KD: {{player.frags}}/{{player.deaths}}</p>
       </div>
       <p class="vs box">vs.</p>
       <div class="player box" *ngIf="sortPlayersByScore(game.players)[1] as player"
-      (mouseover)="onHover(player)" (mouseout)="offHover()">
+      (mouseover)="onHover(player)" (mouseout)="offHover()" (click)="navigateToPlayerPage(player)">
         <p class="name" [innerHTML]="player.colored_name | coloredName"></p>
         <p class="score">Score: {{player.score}}</p>
         <p class="kd">KD: {{player.frags}}/{{player.deaths}}</p>
@@ -19,7 +19,7 @@
     <ng-template #notDuel>
       <div class="not-duel">
         <div *ngFor="let player of sortPlayersByScore(game.players); index as i" class="entry"
-        (mouseover)="onHover(player)" (mouseout)="offHover()">
+        (mouseover)="onHover(player)" (mouseout)="offHover()" (click)="navigateToPlayerPage(player)">
           <p [class.first]="i == 0"
             [class.second]="i == 1"
             [class.third]="i == 2"
@@ -45,7 +45,8 @@
       </tr>
       <tr *ngFor="let player of sortPlayersByScore(getPlayersByTeam(i))"
       (mouseover)="onHover(player)"
-      (mouseout)="offHover()">
+      (mouseout)="offHover()"
+      (click)="navigateToPlayerPage(player)">
         <td class="too-close" [innerHTML]="player.colored_name | coloredName"></td>
         <td>{{player.score}}</td>
         <td>{{player.frags}}</td>

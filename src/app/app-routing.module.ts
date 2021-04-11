@@ -10,13 +10,13 @@ import { PlayerBrowserComponent } from './player-browser/player-browser.componen
 import { PlayerPageComponent } from './player-page/player-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomePageComponent},
   { path: 'browser/games', component: GameBrowserComponent},
   { path: 'browser/players', component: PlayerBrowserComponent},
   { path: 'game/:gameID', component: GamePageComponent},
   { path: 'player/:playerName', component: PlayerPageComponent},
   { path: 'about', component: AboutPageComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
 ];
 
 @NgModule({
