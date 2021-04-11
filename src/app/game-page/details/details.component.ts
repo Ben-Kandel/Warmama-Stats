@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Player, Game, Weapon, Award } from 'src/game';
+import { FullGame, Player, Weapon } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-details',
@@ -8,119 +8,128 @@ import { Player, Game, Weapon, Award } from 'src/game';
 })
 export class DetailsComponent implements OnInit {
 
-  @Input() game: Game;
   @Input() hover: Player;
-
-  mappings = {
-    'GL' : 'grenadelauncher.png',
-    'GB' : 'gunblade.png',
-    'LG' : 'lasergun.png',
-    'MG' : 'machinegun.png',
-    'PG' : 'plasmagun.png',
-    'RG' : 'riotgun.png',
-    'RL' : 'rocketlauncher.png',
-    'EB': 'electrobolt.png',
-    'IG': 'instagun.png',
-  }
+  @Input() game: FullGame;
 
   constructor() { }
 
-  ngOnInit(): void { }
-
-  convertToPath(name: string) {
-    return this.mappings[name];
+  ngOnInit(): void {
   }
 
-  filterOutFakePlayers(): Player[] {
-    return this.game.players.filter(x => {
-      return x.name != '--';
-    });
+  gametypeLike(compare: string) {
+    return this.game.gametype.includes(compare);
   }
 
-  sumUpDamage(player: Player): number {
-    return player.weapons.map(weapon => weapon.damage).reduce((a, b) => a + b, 0);
+  getDamageRatio(p: Player): number {
+    return p.dmg_given / p.dmg_taken;
   }
 
-  getTopDamagePlayers(amount: number, list: Player[] ) : Player[] {
-    let results = list.sort((a, b) => this.sumUpDamage(b) - this.sumUpDamage(a));
-    return results.slice(0, amount);
+  getKDRatio(p: Player): number {
+    return p.frags / p.deaths;
   }
-  
-  getBestAccOfWeapon(weapon: string): Player {
-    let best = -1;
-    let player: Player;
-    this.game.players.forEach(p => {
-      let test = p.weapons.find(w => w.name == weapon);
-      if(test) {
-        if(test.accuracy > best) {
-          best = test.accuracy;
-          player = p;
+
+  getAccuracy(w: Weapon): number {
+    return w.shots_hit / w.shots_fired * 100;
+  }
+
+  parseGametype(): string {
+    if(this.game.gametype.includes('bomb')) {
+      return 'bomb';
+    }else if(this.game.gametype.includes('ctf')) {
+      return 'ctf';
+    }else if(this.game.gametype.includes('duel')) {
+      return 'duel'
+    }else if(this.game.gametype.includes('ffa')) {
+      return 'ffa';
+    }else if(this.game.gametype.includes('ca') || this.game.gametype.includes('ftag')) {
+      // 'ca' is the most likely to match when we don't want it to, so we'll put it last
+      return 'ca';
+    }
+    return 'idk';
+  }
+
+  getMostHealthGained(): Player {
+    let p1 = this.game.players[0];
+    let p2 = this.game.players[1];
+    return (p1.duel_stats.health_taken > p2.duel_stats.health_taken) ? p1 : p2; // don't care about ties
+  }
+
+  getMostArmorGained(): Player {
+    let p1 = this.game.players[0];
+    let p2 = this.game.players[1];
+    return (p1.duel_stats.armor_taken > p2.duel_stats.armor_taken) ? p1 : p2; // don't care about ties
+  }  
+
+  getMostDamageGiven(): Player {
+    let highest = 0;
+    let answer: Player;
+    for(let player of this.game.players) {
+      if(player.dmg_given > highest) {
+        answer = player;
+        highest = player.dmg_given;
+      }
+    }
+    return answer;
+  }
+
+  getMostDamageTaken(): Player {
+    let highest = 0;
+    let answer: Player;
+    for(let player of this.game.players) {
+      if(player.dmg_taken > highest) {
+        answer = player;
+        highest = player.dmg_taken;
+      }
+    }
+    return answer;
+  }
+
+  getMostFrags(): Player {
+    let highest = 0;
+    let answer: Player;
+    for(let player of this.game.players) {
+      if(player.frags > highest) {
+        answer = player;
+        highest = player.frags;
+      }
+    }
+    return answer;
+  }
+
+  getWeaponByName(player: Player, name: string): Weapon {
+    return player.weapons.find(w => w.name == name);
+  }
+
+  getHighestEB(): Player {
+    let highestAcc = 0;
+    let answer: Player;
+    for(let player of this.game.players) {
+      let eb = this.getWeaponByName(player, 'EB');
+      if(eb) {
+        let this_acc = this.getAccuracy(eb);
+        if(this_acc > highestAcc) {
+          answer = player;
+          highestAcc = this_acc;
         }
       }
-    });
-    return player; // it's fine to return undefined, as the *ngIf in the template will check for us
+    }
+    return answer;
   }
 
-  getWeaponAcc(weapon: string, p: Player): Weapon {
-    return p.weapons.find(w => w.name == weapon); // since we use this function in tandem 
-  }
-  
-
-  getMostUsedWeapon(list: Player[]) {
-    let weapons = new Map();
-    list.forEach(player => {
-      player.weapons.forEach(weapon => {
-        let name = weapon.name;
-        let shots = weapon.shots;
-        if(weapons.has(name)){
-          weapons.set(name, weapons.get(name) + shots);
-        }else {
-          weapons.set(name, shots)
+  getHighestLG(): Player {
+    let highestAcc = 0;
+    let answer: Player;
+    for(let player of this.game.players) {
+      let lg = this.getWeaponByName(player, 'LG');
+      if(lg) {
+        let this_acc = this.getAccuracy(lg);
+        if(this_acc > highestAcc) {
+          answer = player;
+          highestAcc = this_acc;
         }
-      });
-    });
-    // https://stackoverflow.com/questions/51690146/javascript-finding-highest-value-in-map-vs-object
-    let [name, num] = [...weapons.entries()].reduce((a, e ) => e[1] > a[1] ? e : a);
-    return `${name} at ${num.toLocaleString()} shots`;
-  }
-
-  getMostDamagingWeapon(list: Player[]) {
-    let weapons = new Map();
-    list.forEach(player => {
-      player.weapons.forEach(weapon => {
-        let name = weapon.name;
-        let dmg = weapon.damage;
-        if(weapons.has(name)){
-          weapons.set(name, weapons.get(name) + dmg);
-        }else {
-          weapons.set(name, dmg);
-        }
-      });
-    });
-    // https://stackoverflow.com/questions/51690146/javascript-finding-highest-value-in-map-vs-object
-    let [name, num] = [...weapons.entries()].reduce((a, e ) => e[1] > a[1] ? e : a);
-    return `${name} with ${num.toLocaleString()} damage`;
-  }
-
-  getAccuraciesDescending(): Weapon[] {
-    if(this.hover.weapons.length == 0) {
-      return [];
+      }
     }
-    return this.hover.weapons.slice(0).sort((a, b) => b.accuracy - a.accuracy);
-  }
-
-  getDamagesDescending(): Weapon[] {
-    if(this.hover.weapons.length == 0){
-      return [];
-    }
-    return this.hover.weapons.slice(0).sort((a, b) => b.damage - a.damage);
-  }
-
-  getAwardsDescending(): Award[] {
-    if(this.hover.awards.length == 0){
-      return [];
-    }
-    return this.hover.awards.slice(0).sort((a, b) => b.count - a.count);
+    return answer;
   }
 
 

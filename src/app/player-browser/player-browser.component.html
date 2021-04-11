@@ -1,0 +1,65 @@
+<div id="parent">
+  <div class="player-list">
+    <div class="header item">
+      <p>Name</p>
+      <p># of Games</p>
+    </div>
+    <br>
+    <div *ngIf="players && players.length == 0">
+      <p>No results.</p>
+    </div>
+    <div *ngFor="let player of players" class="item"
+    (click)="playerClicked(player)">
+      <p [innerHTML]="player.colored_name | coloredName"></p>
+      <p>{{player.game_count}}</p>
+    </div>
+    <div class="list-controls">
+      <img (click)="prevPage()" src="../../assets/good-arrow.png" width="20" height="20" class="left" alt="left arrow">
+      <form [formGroup]="searchForm" (keydown)="keyPressed($event)" class="form">
+        <input  formControlName="player" type="text" placeholder="enter player name">
+      </form>
+      <img (click)="nextPage()" src="../../assets/good-arrow.png"  width="20" height="20" alt="right arrow">
+    </div>
+  </div>
+  <div *ngIf="selectedPlayer && selectedPlayerInfo; else elseBlock" class="player-details">
+    <div class="header">
+      <h2 [innerHTML]="selectedPlayer.colored_name | coloredName"></h2>
+    </div>
+    <div class="pstats">
+      <div class="kd item">
+        <p class="title">KD Ratio</p>
+        <p class="total">{{selectedPlayerInfo.pstats.total_frags / selectedPlayerInfo.pstats.total_deaths | number}}</p>
+        <p class="desc">{{selectedPlayerInfo.pstats.total_frags | number}} / {{selectedPlayerInfo.pstats.total_deaths | number}}</p>
+      </div>
+      <div class="dmg item">
+        <p class="title">DMG Ratio</p>
+        <p class="total">{{selectedPlayerInfo.pstats.total_dmg_given / selectedPlayerInfo.pstats.total_dmg_taken | number}}</p>
+        <p class="desc">{{selectedPlayerInfo.pstats.total_dmg_given | number}} / {{selectedPlayerInfo.pstats.total_dmg_taken | number}}</p>
+      </div>
+    </div>
+    <table class="recent-games">
+      <caption>Recent Games</caption>
+      <tr>
+        <th>Hostname</th>
+        <th>Gametype</th>
+        <th>Map</th>
+        <th>Date</th>
+      </tr>
+      <tr *ngFor="let game of selectedPlayerInfo.recent_games"
+      (click)="navigateToGame(game)">
+        <td [innerHTML]="game.hostname | coloredName"></td>
+        <td>{{game.gametype}}</td>
+        <td>{{game.map}}</td>
+        <td>{{game.date}}</td>
+        
+      </tr>
+    </table>
+    <p>Click on a game to view the full game page.</p>
+    <p class="page-link" (click)="navigateToPlayerPage()">Click for full player page.</p>
+  </div>
+  <ng-template #elseBlock>
+    <div class="player-details">
+
+    </div>
+  </ng-template>
+</div>

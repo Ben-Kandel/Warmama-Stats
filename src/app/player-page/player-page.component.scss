@@ -1,0 +1,102 @@
+@import '../../variables';
+
+#player-page {
+  width: 95vw;
+  height: 80em;
+  // height: min(100em, 95vh);
+  margin-top: 1em;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .top {
+    border: 2px solid $gray;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+    flex: 1; // takes care of height
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    
+    h2 {
+      font-size: 280%;
+    }
+
+    .player-info {
+      
+      width: 75%;
+      height: 100%;
+      margin: auto;
+      display: flex;
+      flex-flow: row nowrap;
+      font-size: 150%;
+
+      .item {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        .smaller {
+          font-size: 75%;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    border: 2px solid $green;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 2em;
+    flex: 2; // takes care of height. this container is twice as tall as the top one
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    .gametype-selector {
+      // border: 1px solid red;
+      margin-top: 0.5em;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+
+      .gt {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        border: 1px solid $gray;
+        border-radius: 10px;
+        padding: 1em;
+        margin: 0.25em;
+
+        &:hover {
+          background-color: $lighter-blue;
+        }
+
+        .name {
+          font-size: 150%;
+        }
+
+        .count {
+          font-size: 130%;
+          color: $green;
+        }
+      }
+
+      .selected {
+        border: 1px solid $orange;
+        background-color: $lighter-blue;
+      }
+
+    }
+
+
+    .chart-container {
+      border: 1px solid $orange;
+      margin-top: 2em;
+      width: 80%;
+    }
+  }
+}

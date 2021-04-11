@@ -1,0 +1,154 @@
+@import '../../variables';
+
+#parent {
+  width: 95vw;
+  height: 85vh;
+  // border: 1px solid $green;
+  margin-top: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  & > div {
+    margin: 0.25em;
+  }
+
+  @media (max-width: 800px) {
+    flex-flow: column nowrap;
+  }
+
+  .player-list {
+    flex: 1; // takes care of width
+    height: 100%;
+    border: 2px solid $gray;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
+    .item {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      font-size: 180%;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        border-top: 1px solid $green;
+        border-bottom: 1px solid $green;
+        background-color: $lighter-blue;
+      }
+    }
+
+    .header {
+      font-size: 250%;
+      color: $orange;
+    }
+
+    .list-controls {
+      align-self: center; // align the list controls horizontally
+      margin-top: auto; // put the list controls at the bottom of the container
+      display: flex;
+      flex-flow: row nowrap;
+      img {
+        border: 1px solid transparent;
+        &:hover {
+          border: 1px solid $gray;
+        }
+      }
+
+      .left {
+        transform: scaleX(-1);
+      }
+    }
+
+  }
+
+  .player-details {
+    flex: 3; // takes care of width
+    height: 100%;
+    border: 2px solid $green;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    
+    .page-link {
+      padding: 5px;
+      border: 1px solid $gray;
+      margin-top: 0.25em;
+      &:hover {
+        background-color: $lighter-blue;
+        border: 1px solid $orange;
+      }
+    }
+
+    @media (max-width: 800px) {
+      width: 100%;
+      height: 100%;
+    }
+
+    .header {
+      text-align: center;
+      h2 {
+        font-size: 240%;
+      }
+
+      .game-count {
+        margin-bottom: 5px;
+        color: $green;
+      }
+
+    }
+
+    .pstats {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
+      width: 50%;
+      margin-bottom: 10px;
+
+      .item {
+        text-align: center;
+        .title { 
+          font-size: 150%; 
+          color: $orange;
+        }
+        .total {font-size: 130%; }
+        .desc { color: $green; }
+      }
+    }
+
+    h3 {
+      font-size: 200%;
+    }
+
+    .recent-games {
+      text-align: left;
+      width: 75%;
+      height: 20em;
+      font-size: 120%;
+      border: 1px solid $gray;
+      border-collapse: collapse;
+      margin-top: 5px;
+      margin-bottom: 25px;
+
+      th {
+        color: $orange;
+      }
+
+
+      tr:hover {
+        background-color: $lighter-blue;
+      }
+      
+    }
+
+  }
+
+}

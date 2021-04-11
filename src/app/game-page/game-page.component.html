@@ -1,32 +1,27 @@
-<div class="game-page">
-  <div class="search">
-    <input (input)="gameId = $event.target.value" type="text" placeholder="Enter game ID..." id="id-input" [(ngModel)]="gameId">
-    <button class="button" (click)="inputSubmit()">Search</button>
-  </div>
-  <div *ngIf="game" class="header">
-    <div class="name">
-      <h2><span class="gametype">{{game.gametype}}</span> on <span class="map">{{game.map}}</span></h2>
-    </div>
-    <div class="date-time">
-      <div class="time">
-        <img src="../../assets/white-clock.png" alt="game time" width="18" height="18">
-        <p>{{game.time | timePlayed}}</p>
-      </div>
-      <div class="date">
-        {{game.date | date }}
+<div *ngIf="game; else elseBlock" class="game-page">
+  <div class="header">
+    <h1 [innerHTML]="game.hostname | coloredName"></h1>
+    <p><span class="gametype">{{game.gametype}}</span> on <span class="map">{{game.map}}</span></p>
+    <div class="datetime">
+      <p>{{game.date | date}}</p>  
+      <div class="length">
+        <img src="../../assets/white-clock.png" width="20" height="20" alt="game length">
+        <p>{{game.length | timePlayed}}</p>
       </div>
     </div>
   </div>
-  <div class="outer-container">
-    <div *ngIf="game; else elseBlock" class="the-game">
+  <div class="parent">
+    <div class="top">
       <app-scoreboard (playerHovered)="playerHovered($event)" [game]="game"></app-scoreboard>
       <app-details [hover]="hover" [game]="game"></app-details>
-      <app-gametype-details [game]="game"></app-gametype-details>
     </div>
-    <ng-template #elseBlock>
-      <div class="no-game">
-        no game selected
-      </div>
-    </ng-template>
+    <div class="bottom">
+      <app-stats-list [hover]="hover" [game]="game"></app-stats-list>
+    </div>
   </div>
 </div>
+<ng-template #elseBlock>
+  <div class="elseBlock">
+    <p *ngIf="waiting == false">Can't fetch game with given id: {{gameID}}</p>
+  </div>
+</ng-template>

@@ -1,230 +1,211 @@
 @import '../../../variables';
 
 .details {
-  width: 50em;
-  height: 20em;
-  // border: 2px solid $green;
-  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  display: flex;
 
-  .player-view {
+  .hover-info {
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
     height: 100%;
+    width: 100%;
+    align-self: center;
+    margin: auto;
 
-    p {
-      margin: 0;
-      padding: 0;
+
+    h2 {
+      font-size: 250%;
     }
 
-    h3 {
-      color: $orange;
-      font-size: 130%;
-      padding: 0;
-      margin: 0;
-    }
-
-    .header {
-      flex: 1;
+    .basic-stats {
       display: flex;
       flex-flow: row nowrap;
-      align-items: center;
+      justify-content: space-evenly;
+      width: 25em; // basically how much space is in between 'damage' and 'frags' part
+      text-align: center;
       
-      .name {
-        flex: 1;
-        p {
-          font-size: 140%;
-        }
-        
+      font-size: 150%;
+
+      .title {
+        font-size: 150%;
+        color: $orange;
       }
 
-      .time {
-        flex: 1;
+      
+
+    }
+
+    .gametype-stats {
+      flex: 1;
+      width: 100%;
+
+      .awards {
+        text-align: center;
+        font-size: 150%;
+        display: flex;
+        flex-flow: column wrap;
+      }
+
+      .duel-stats {
+
+        .wrapper {
+          display: flex;
+          flex-flow: row nowrap;
+
+          .item {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 50%;
+            text-align: center;
+            font-size: 150%;
+
+            p {
+              color: $green;
+            }
+            
+            .num {
+              color: $gray;
+            }
+
+            .armor {
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+            }
+
+            .health {
+              display: flex;
+              flex-flow: row wrap;
+              justify-content: center;
+            }
+            
+          }
+        }
+
+        .title {
+          font-size: 150%;
+          text-align: center;
+          color: $orange;
+        }
+      }
+    }
+  }
+
+  .general-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    .game {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+
+      .item {
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
         justify-content: center;
-      }
+        margin: 3em;
 
-    }
-
-    .stats {
-      flex: 6;
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      justify-content: flex-start;
-      
-      .row {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: center;
-        width: 80%;
-        margin: auto;
-
-        * {
-          margin: 5px;
-        }
-
-        .color-me-green {
-          color: $green;
-        }
-        
-        .color-me-orange {
+        .title {
           color: $orange;
+          font-size: 200%;
         }
 
-        .RL {
-          background-image: url('../../../assets/rocketlauncher.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
-        }
-
-        .EB {
-          background-image: url('../../../assets/electrobolt.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
-        }
-
-        .LG {
-          background-image: url('../../../assets/lasergun.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
+        .name {
+          font-size: 150%;
         }
         
-
-        .PG {
-          background-image: url('../../../assets/plasmagun.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
+        .stat {
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          justify-content: space-evenly;
+  
+          p {
+            font-size: 200%;
+          }
+  
         }
-
-        .GL {
-          background-image: url('../../../assets/grenadelauncher.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
-        }
-        
-        .GB {
-          background-image: url('../../../assets/gunblade.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
-        }
-
-        .MG {
-          background-image: url('../../../assets/machinegun.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
-        }
-
-        .RG {
-          background-image: url('../../../assets/riotgun.png');
-          background-size: 20px;
-          background-repeat: no-repeat;
-          background-position: left center;
-          padding: 0px 0px 0px 25px;
-        }
-
+  
       }
       
-    }
-
-    
-  }
-
-  .game-view {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    height: 100%;
-
-    h3 {
-      color: $orange;
-      font-size: 130%;
-      flex: 1;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .damage {
-      flex: 6;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: center;
-      align-items: center;
-      font-size: 120%;
-
-      img {
-        vertical-align: middle;
-      }
-      
-      .entry {
-
+      .left {
+        flex: 1;
+        height: 100%;
         display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        justify-content: center;
-
-        p {
-          margin: 0;
-          padding: 0;
-        }
-      }
-
-      
-
-    }
-
-    .accuracy {
-      flex: 6;
-      display: flex;
-      flex-flow: column nowrap;
-      align-items: center;
-      justify-content: center;
-      
-      .item {
-        display: flex;
-        flex-flow: row nowrap;
+        flex-flow: column nowrap;
         align-items: center;
         justify-content: space-evenly;
-        font-size: 120%;
-        // border: 1px solid $orange;
+        text-align: center;
 
-        .color-me {
-          color: $green;
+        .entry {
+          .title {
+            font-size: 175%;
+            color: $orange;
+          }
+          
+          .name {
+            font-size: 145%;
+          }
+
+          .num {
+            color: $gray;
+          }
+
+          p {
+            color: $green;
+          }
         }
+      }
 
-        * {
-          margin: 3px;
-          padding: 0;
+      .right {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-evenly;
+        text-align: center;
+
+        .entry {
+          .title {
+            font-size: 175%;
+            color: $orange;
+          }
+
+          .name {
+            font-size: 145%;
+
+            img {
+              vertical-align: middle;
+            }
+          }
+
+          .num {
+            color: $green;
+          }
+
         }
 
       }
 
     }
-
-    .row {
-      flex: 1;
-      display: flex;
-      flex-flow: column nowrap;      
-      height: 100%;
-    }
-
   }
 
+}
 
+@media (max-width: 700px) {
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }

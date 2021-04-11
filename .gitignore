@@ -45,6 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# others
-/.firebase
-firebase-debug.log
+# API files
+/api/node_modules
+/api/reports

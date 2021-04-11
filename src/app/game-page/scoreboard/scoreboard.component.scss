@@ -1,222 +1,31 @@
 @import '../../../variables';
 
-.game {
-
-  .no-team-game {
-
-    .duel {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: space-evenly;
-      border: 1px solid $gray;
-      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-      padding: 15px;
-      width: 60em;
-
-      .box {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-self: center;
-      }
-
-      .box:first-child {
-        margin-right: auto;
-      }
-
-      .box:last-child {
-        margin-left: auto;
-      }
-
-      .vs {
-        font-size: 200%;
-        color: $orange;
-      }
-
-      .player {
-        font-size: 220%;
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: center;
-        justify-content: center;
-        min-width: 10em;
-        height: 7em;
-        border: 1px solid transparent; // so the border on :hover doesnt move anything around
-        // border: 1px dashed $gray; interesting idea but it doesnt really work that well
-
-        &:hover {
-          border: 1px solid $orange;
-        }
-
-        p {
-          margin: 0;
-          padding: 0;
-        }
-
-        .score {
-          color: $gray;
-          font-size: 70%;
-          color: $green;
-        }
-
-        .kda {
-          font-size: 50%;
-          margin: 5px;
-          color: $green;
-        }
-
-        .pickups {
-
-          ul {
-            // https://stackoverflow.com/questions/6472178/two-unordered-list-side-by-side
-            list-style-type: none;
-            margin: 10px;
-            padding: 0;
-            display: inline-block;
-            *display: inline;
-            zoom: 1;
-            font-size: 70%;
-            vertical-align: middle;
-
-            .ra {
-              background-image: url('../../../assets/ra.png');
-              background-size: 20px;
-              background-repeat: no-repeat;
-              background-position: left center;
-              padding: 0px 0px 0px 25px;
-            }
-
-            .ya {
-              background-image: url('../../../assets/ya.png');
-              background-size: 20px;
-              background-repeat: no-repeat;
-              background-position: left center;
-              padding: 0px 0px 0px 25px;
-            }
-
-
-            .ga {
-              background-image: url('../../../assets/ga.png');
-              background-size: 20px;
-              background-repeat: no-repeat;
-              background-position: left center;
-              padding: 0px 0px 0px 25px;
-            }
-
-            .mh {
-              background-image: url('../../../assets/mega-health.png');
-              background-size: 20px;
-              background-repeat: no-repeat;
-              background-position: left center;
-              padding: 0px 0px 0px 25px;
-            }
-
-            .uh {
-              background-image: url('../../../assets/ultra-health.png');
-              background-size: 20px;
-              background-repeat: no-repeat;
-              background-position: left center;
-              padding: 0px 0px 0px 25px;
-            }
-
-          }
-        }
-
-      }
-    }
-
-    .ffa {
-
-      font-size: 150%;
-      text-align: center;
-
-
-      ul {
-        list-style-type: none;
-        padding: 0;
-        display: inline-block;
-        text-align: left;
-        border: 1px solid $gray;
-        box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-        padding: 15px;
-        
-        
-        li {
-          border: 1px solid transparent; // so the hover border doesnt shift elements around
-          // width: 5em;
-          
-          
-
-          p {
-            padding: 5px;
-            margin: 0;
-          }
-
-        }
-
-        .entry {
-          display: flex;
-          flex-flow: row nowrap;
-          align-items: center;
-
-          &:hover {
-            border: 1px solid $orange;
-          }
-
-          .test {
-            // font-size: 60%;
-            color: $green;
-          }
-
-          .first {
-            color: gold;
-          }
-
-          .second {
-            color: rgb(226, 222, 222);
-          }
-
-          .third {
-            color: #cf7010;
-          }
-
-          .other {
-            color: red;
-          }
-
-        }
-
-      }
-    }
-
-  }
+.scoreboard {
+  width: 100%;
+  height: 100%;
 
   .team-game {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-evenly;
-    // border: 1px solid $gray;
-    // box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-
+    width: 100%;
+    height: 100%;
+    
     .team {
       text-align: left;
       table-layout: fixed;
       border-collapse: collapse;
       margin: 10px;
-      width: 35em;
-      height: 20em;
+      width: 23em;
+      height: 15em;
+      font-size: 105%;
       box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-  
-      .too-close {
-        padding-left: 4px;
+
+      caption {
+        font-size: 120%;
       }
-  
-      .target { // the first row in the table, the header
-        border-bottom: 1px solid $gray;
-      }
-  
+
       tr td {
         background-color: $blue;
       }
@@ -224,10 +33,6 @@
       tr:nth-child(odd) td {
         background-color: $lighter-blue;
       }
-  
-      // td { // every row
-      //   // border-bottom: 2px solid $gray;
-      // }
   
       tr:last-child td { // the last row
         border: none;
@@ -240,7 +45,13 @@
       tr:hover td {
         background-color: transparent;
       }
-  
+      
+
+      .target { // the first row in the table, the header
+        border-bottom: 1px solid $gray;
+        height: 3em; // this height should be fixed, or else it looks dumb
+      }
+
       .name {
         width: 60%;
       }
@@ -250,73 +61,150 @@
       }
   
       .frags {
-        width: 10%;
+        width: 15%;
       }
-  
-    }
 
+      .too-close {
+        padding-left: 4px;
+      }
+
+    }
   }
 
-}
+  .non-team-game {
+    width: 100%;
+    height: 100%;
+    display: flex; // so we can center things easier
+    // border: 1px solid $gray;
 
-.forbidden {
-  color: $forbidden;
+
+    .duel {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-evenly;
+      align-self: center;
+      // margin: auto;
+      width: 100%;
+      border: 2px solid $gray;
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+
+      .vs {
+        font-size: 200%;
+        color: $orange;
+      }
+
+      // https://stackoverflow.com/questions/32378953/keep-the-middle-item-centered-when-side-items-have-different-widths
+      .box {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
+      .box:first-child { margin-right: auto; }
+      .box:last-child { margin-left: auto;  }
+
+      .player {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        padding: 4em 1em 4em 1em;
+        margin: 5px;
+        border: 1px solid transparent;
+
+
+        &:hover {
+          border: 1px solid $orange;
+        }
+
+        .name {
+          font-size: 225%; // about as big as we can make it without breaking things
+        }
+
+        .score {
+          color: $green;
+          font-size: 175%;
+        }
+
+        .kd {
+          color: $green;
+        }
+      }
+
+      
+
+      
+    }
+
+    .not-duel {
+
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      align-self: center; // this is why we need display:flex on the parent container (centers vertically)
+      margin: auto; // center horizontally
+      max-height: 100%;
+      font-size: 150%;
+      border: 2px solid $gray;
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+      padding: 0.25em 2em 0.25em 2em;
+
+      .entry {
+        display: flex;
+        flex-flow: row nowrap;
+        align-self: flex-start; // make every item start at the same spot so everything lines up nice
+        padding: 5px; // put some extra space between items
+        border: 1px solid transparent; // so that when we actually hover, the newly drawn border doesnt move things around
+
+        &:hover {
+          border: 1px solid $orange;
+        }
+
+        p {
+          padding: 0 3px 0 3px; // put some extra space between the items in the items (lol)
+        }
+
+        .score {
+          color: $green;
+        }
+
+        .first {
+          color: gold; // gold
+        }
   
-}
+        .second {
+          color: rgb(226, 222, 222); // silver-ish
+        }
+  
+        .third {
+          color: #a05811; // bronze-ish
+        }
+        
+        .other {
+          color: rgba(255, 0, 0, 0.438);
+        }
+      }
 
-.forbidden-table {
-  border: 2px solid $forbidden;
-}
 
-.icy {
-  color: $icy;
-}
 
-.icy-table {
-  border: 2px solid $icy;
-}
+    }
+  }
 
-.regular-table {
-  border: 2px solid black;
-}
+  .forbidden {
+    color: $forbidden;
+    
+  }
+  
+  .forbidden-table {
+    border: 2px solid $forbidden;
+  }
+  
+  .icy {
+    color: $icy;
+  }
+  
+  .icy-table {
+    border: 2px solid $icy;
+  }
 
-.black {
-  color: black;
-}
-
-.red {
-  color: red;
-}
-
-.green {
-  color: rgb(17, 221, 17);
-}
-
-.yellow {
-  color: yellow;
-}
-
-.blue {
-  color: rgb(8, 8, 214);
-}
-
-.cyan {
-  color: cyan;
-}
-
-.pink {
-  color: rgb(240, 46, 207);
-}
-
-.white {
-  color: white;
-}
-
-.orange {
-  color: rgb(199, 132, 8);
-  // color: $orange;
-}
-
-.gray {
-  color: gray;
 }

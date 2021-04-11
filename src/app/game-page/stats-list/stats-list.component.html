@@ -1,0 +1,44 @@
+<div class="stats-list">
+  <div class="table-controls">
+    <p [class.selected]="tableMode == 'accuracy'" (click)="changeTableMode('accuracy')">Accuracy</p>
+    <p [class.selected]="tableMode == 'damage'" (click)="changeTableMode('damage')">Damage</p>
+    <p [class.selected]="showHitFired" (click)="toggleHitFired()">{{showHitFired ? 'Show Less' : 'Show More?'}}</p>
+  </div>
+  <table *ngIf="game.instagib == 0" class="the-table">
+    <tr class="header">
+      <th class="name">Name</th>
+      <!-- I do it like this to get the text and images lined up perfectly -->
+      <th><div class="RL icon">RL <img src="../../../assets/rocketlauncher.png" width="20" height="20" alt="rocket launcher"></div></th>
+      <th><div class="LG icon">LG <img src="../../../assets/lasergun.png" width="20" height="20" alt="laser gun"></div></th>
+      <th><div class="EB icon">EB <img src="../../../assets/electrobolt.png" width="20" height="20" alt="electro bolt"></div></th>
+      <th><div class="GL icon">GL <img src="../../../assets/grenadelauncher.png" width="20" height="20" alt="grenade launcher"></div></th>
+      <th><div class="MG icon">MG <img src="../../../assets/machinegun.png" width="20" height="20" alt="machine gun"></div></th>
+      <th><div class="RG icon">RG <img src="../../../assets/riotgun.png" width="20" height="20" alt="riot gun"></div></th>
+      <th><div class="PG icon">PG <img src="../../../assets/plasmagun.png" width="20" height="20" alt="plasma gun"></div></th>
+      <th><div class="GB icon">GB <img src="../../../assets/gunblade.png" width="20" height="20" alt="gun blade"></div></th>
+    </tr>
+    <tr *ngFor="let player of sortPlayersByScore()" [class.hovered-player]="player == hover">
+      <td [innerHTML]="player.colored_name | coloredName"></td>
+      <td *ngFor="let name of WEAPON_NAMES">
+        <div *ngIf="getWeaponByName(player, name) as weap">
+          <div>
+            <p *ngIf="tableMode == 'accuracy'" [class.best]="isHighestAccuracy(weap)">{{weap.shots_hit / weap.shots_fired * 100 | number: '1.0-2'}}%</p>
+            <p *ngIf="tableMode =='damage'" [class.best]="isHighestDamage(weap)">{{weap.damage}}</p>
+            <p *ngIf="showHitFired" class="hit-fired">({{weap.shots_hit}}/{{weap.shots_fired}})</p>
+          </div>
+          
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table *ngIf="game.instagib == 1" class="the-table">
+    <tr>
+      <th>Name</th>
+      <th>IG</th>
+    </tr>
+    <tr *ngFor="let player of sortPlayersByScore()">
+      <td [innerHTML]="player.colored_name | coloredName"></td>
+      
+    </tr>
+  </table>
+</div>

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Game, Player } from '../../game';
-import { GameService } from '../game.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api.service';
+import { FullGame, Player, Weapon } from '../interfaces';
 
 @Component({
   selector: 'app-game-page',
@@ -10,43 +10,37 @@ import { GameService } from '../game.service';
 })
 export class GamePageComponent implements OnInit {
 
-  @Input() game: Game;
+  gameID: string;
+  game: FullGame;
   hover: Player;
-  gameId: string;
+  waiting = false;
 
-  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.updateIdFromURL();
-    this.getInitialGame();
+    this.updateIDFromURL();
   }
 
-  updateIdFromURL() {
+  async fetchNewGame(gameID: string) {
+    this.waiting = true;
+    let game = await this.apiService.getFullGame(gameID);
+    this.waiting = false;
+    console.log(game);
+    this.game = game;
+  }
+
+  updateIDFromURL() {
     this.route.params.subscribe(params => {
-      let id = params['gameId'];
-      this.gameId = id;
-      console.log('new game id: ' + this.gameId);
-      // document.getElementById('id-input').nodeValue = 'this.gameId';
+      let id = params['gameID'];
+      console.log('got new id: ' + id);
+      this.fetchNewGame(id);
+      this.gameID = id;      
     });
-  }
-
-  inputSubmit() {
-    console.log('button clicked');
-    // this.router.navigateByUrl(this.router.url.replace('gameId', this.gameId));
-    this.router.navigateByUrl(`/game/${this.gameId}`);
-    this.updateGame();
-  }
-
-  async updateGame() {
-    this.game = await this.gameService.getGame(this.gameId);
-  }
-
-  async getInitialGame() {
-    this.game = await this.gameService.getGame(this.gameId);
   }
 
   playerHovered(player: Player) {
     this.hover = player;
   }
+
 
 }
