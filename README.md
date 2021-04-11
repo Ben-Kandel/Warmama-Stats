@@ -8,6 +8,9 @@ Browse thousands of games, filter by specific gametypes, maps, and players, and 
 So, the project is in a pretty good place right now, so I merged my changes from the upgrade-everything branch into the main branch.
 Development will continue, but all of the basic features I had in mind are finally done.
 
+## Documentation 
+You can read about the api in the readme [here](./api).
+
 ## TODO
 * Complete database rehaul ✔️
 * Complete frontend rehaul ✔️
