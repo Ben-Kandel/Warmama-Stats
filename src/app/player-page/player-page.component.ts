@@ -96,7 +96,7 @@ export class PlayerPageComponent implements OnInit {
 
   legendClicked(e, legendItem) {
     let index = legendItem.datasetIndex;
-    // @ts-expect-error
+    // @ts-expect-error because chartjs is stupid
     let meta = this.chart.getDatasetMeta(index);
     meta.hidden = !chartLegendToggles[legendItem.text];
     chartLegendToggles[legendItem.text] = meta.hidden;
@@ -104,7 +104,6 @@ export class PlayerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.legendClicked.bind(this);
     this.route.params.subscribe(params => {
       this.playerChanged(params);
     });
@@ -262,6 +261,5 @@ export class PlayerPageComponent implements OnInit {
         );
     }
   }
-
   
 }

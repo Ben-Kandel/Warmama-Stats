@@ -1,7 +1,7 @@
 <div class="stats-list">
   <div class="table-controls">
     <p [class.selected]="tableMode == 'accuracy'" (click)="changeTableMode('accuracy')">Accuracy</p>
-    <p [class.selected]="tableMode == 'damage'" (click)="changeTableMode('damage')">Damage</p>
+    <p *ngIf="game.instagib == 0" [class.selected]="tableMode == 'damage'" (click)="changeTableMode('damage')">Damage</p>
     <p [class.selected]="showHitFired" (click)="toggleHitFired()">{{showHitFired ? 'Show Less' : 'Show More?'}}</p>
   </div>
   <table *ngIf="game.instagib == 0" class="the-table">
@@ -32,13 +32,18 @@
     </tr>
   </table>
   <table *ngIf="game.instagib == 1" class="the-table">
-    <tr>
+    <tr class="header">
       <th>Name</th>
-      <th>IG</th>
+      <th><div class="GB icon">IG <img src="../../../assets/instagun.png" width="20" height="20" alt="insta gun"></div></th>
     </tr>
-    <tr *ngFor="let player of sortPlayersByScore()">
+    <tr *ngFor="let player of sortPlayersByScore()" [class.hovered-player]="player == hover">
       <td [innerHTML]="player.colored_name | coloredName"></td>
-      
+      <td *ngIf="getWeaponByName(player, 'IG') as weap">
+        <div>
+          <p [class.best]="isHighestAccuracy(weap)">{{weap.shots_hit / weap.shots_fired * 100 | number: '1.0-2'}}%</p>
+          <p *ngIf="showHitFired" class="hit-fired">({{weap.shots_hit}}/{{weap.shots_fired}})</p>
+        </div>
+      </td>
     </tr>
   </table>
 </div>

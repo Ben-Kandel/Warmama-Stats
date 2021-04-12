@@ -4,14 +4,15 @@
     <div id="sort-form">
       <app-gb-form (searchClicked)="onSubmit($event)"></app-gb-form>
     </div>
-    <div id="hover-preview">
-      <div *ngIf="hover && players; else elseBlock" class="player-preview">
-        <p *ngFor="let player of players" [innerHTML]="player.colored_name | coloredName"></p>
-      </div>
-      <ng-template #elseBlock>
-        <p class="no-players">Hover over a game to view the participants.</p>
-      </ng-template>
+    <div id="hover-preview" *ngIf="hover && players; else elseBlock">
+      <p *ngFor="let player of players" [innerHTML]="player.colored_name | coloredName"></p>
     </div>
+    <ng-template #elseBlock>
+      <div id="hover-preview">
+        <p class="no-players">Hover over a game to view the participants.</p>
+      </div>
+    </ng-template>
+    
   </div>
   <div id="bottom-box">
     <div id="game-list">
