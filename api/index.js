@@ -150,7 +150,6 @@ app.get('/api/playerInfo/:player_name', async (req, res) => {
     recent_games: [],
     pstats: {},
   };
-  // let query = builder.
   let name = req.params.player_name;
   let query = builder.select('games.id, games.map, games.gametype, games.hostname, games.date, games.length').from('players')
     .join('games').on({'players.game_id' : 'games.id'}).where({'players.colored_name' : name}).orderBy('date DESC, games.id DESC')
@@ -169,13 +168,14 @@ app.get('/api/playerInfo/:player_name', async (req, res) => {
 
 // endpoint for getting the list of all gametypes in the database
 app.get('/api/gametypes', async (req, res) => {
-  let [rows, fields]= await promisePool.query('CALL getAllGametypes()');
+  // mysql-bricks doesnt let us SELECT DISTINCT
+  let query = 'SELECT DISTINCT gametype FROM games';
+  let [rows, _] = await promisePool.query(query);
   if(rows.length == 0) {
     res.sendStatus(404); // there are no games in the database, so, there are no gametypes
     return; // get out
   }
-  let l = rows[0]; // unwrap the extra array
-  res.send(l.map(x => x.gametype)); // unwrap the { gametype : xx } objects into just the values
+  res.send(rows.map(x => x.gametype)) // unwrap the { gametype: xx } objects into just the values
 });
 
 app.get('/api/players', async (req, res) => {
@@ -188,10 +188,7 @@ app.get('/api/players', async (req, res) => {
   query = query.offset(offset).limit(limit);
   try {
     query = query.toString();
-    console.log('SEARCHING FOR PLAYERS AND GAME COUNTS:');
-    console.log(query);
     let [rows, fields] = await promisePool.query(query);
-    // console.log(rows);
     res.send(rows);
   }catch(err) {
     console.log(err);

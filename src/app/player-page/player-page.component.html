@@ -6,7 +6,7 @@
         <p>Score: <span class="white">{{playerData2.pstats.total_score | number}}</span></p>
         <p *ngIf="playerData2.pstats.total_dmg_given / playerData2.pstats.total_dmg_taken as dmgr">
           Damage Ratio: 
-          <span [class.green]="dmgr >= 1" [class.red]="dmgr < 1">{{dmgr | number}}</span>
+          <span [class.green]="dmgr >= 1" [class.red]="dmgr < 1">{{dmgr | number: '1.0-2'}}</span>
           -
           <span class="smaller">({{playerData2.pstats.total_dmg_given | number}}/{{playerData2.pstats.total_dmg_taken | number}})</span>
         </p>
